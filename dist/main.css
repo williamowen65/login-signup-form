@@ -1,0 +1,43 @@
+/*!**********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles.scss ***!
+  \**********************************************************************************************************/
+h1 {
+  color: blue;
+}
+
+#auth-container {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  margin: auto;
+  border: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+}
+#auth-container .cover {
+  width: 400px;
+  height: 70vh;
+  position: absolute;
+  background-color: blue;
+  transition: left 0.5s, translate 0.5s;
+}
+#auth-container .cover.left {
+  left: 0%;
+}
+#auth-container .cover.right {
+  left: 100%;
+  translate: -100% 0;
+}
+#auth-container[auth-mode=login] .cover.right {
+  translate: 0;
+}
+#auth-container[auth-mode=signup] .cover.left {
+  translate: -100%;
+}
+#auth-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
