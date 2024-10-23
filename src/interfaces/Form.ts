@@ -3,18 +3,35 @@ import { Validator } from "../utils/Validator";
 
 export abstract class Form {
     validator: Validator;
+    // @ts-ignore
     submit(formData) {};
+    // @ts-ignore
     displayErrors(errors) {
         for (let field in errors) {
             const inputElement = document.querySelector(`#${field}`);
             const errorElement = document.querySelector(`#${field}-error`);
 
             if (errorElement) {
-                errorElement.innerHTML = errors[field].join("<br>");
+                errorElement.innerHTML = `<small>${errors[field][0]}</small>`
             }
 
             if (inputElement) {
                 inputElement.classList.add("input-error");
+            }
+        }
+    }
+     // @ts-ignore
+    clearErrors(formData) {
+        for (let field in formData) {
+            const inputElement = document.querySelector(`#${field}`);
+            const errorElement = document.querySelector(`#${field}-error`);
+
+            if (errorElement) {
+                errorElement.innerHTML = "";
+            }
+
+            if (inputElement) {
+                inputElement.classList.remove("input-error");
             }
         }
     }

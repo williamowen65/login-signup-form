@@ -5,9 +5,9 @@ export class Validator{
     constructor(){
         this.errors = [];   
     }
-    isRequired(value, fieldName){
+    isRequired(value, fieldName, options ={}){
         if(!value || value.length === 0){
-            this.addError(fieldName, `${capitalizeFirstLetter(fieldName)} is required`);
+            this.addError(fieldName, `${options.alias || capitalizeFirstLetter(fieldName)} is required`);
             return false;
         }
         return true;

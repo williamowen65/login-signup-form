@@ -73,6 +73,8 @@ export function setFormSubmitListeners() {
         console.log('submitting')
         e.preventDefault();
         const formData = {
+            firstname: (document.getElementById('firstname') as HTMLInputElement).value,
+            lastname: (document.getElementById('lastname') as HTMLInputElement).value,
             username: (document.getElementById('username') as HTMLInputElement).value,
             email: (document.getElementById('email') as HTMLInputElement).value,
             password: (document.getElementById('password') as HTMLInputElement).value,

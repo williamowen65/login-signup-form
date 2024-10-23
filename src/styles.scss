@@ -1,12 +1,13 @@
-h1 {
-    color: blue;
-}
+
 
 button {
     cursor: pointer;
 }
 
 #auth-container {
+    h2 {
+        user-select: none;
+    }
     display: flex;
     justify-content: space-around;
     width: 800px;
@@ -67,6 +68,7 @@ button {
             background-color: #cccccc64;
             height: fit-content;
             z-index: 1;
+            user-select: none;
         }
         &.left {
             left: 00%;
@@ -112,6 +114,7 @@ button {
     label {
         font-size: 1.2rem;
         position: relative;
+        margin-bottom:5px;
         .text{
             position: absolute;
             z-index: 1;
@@ -124,6 +127,7 @@ button {
             .text{
                 transform: translate(0px, -7px);
                 font-size: 0.75rem;
+                font-weight: bold;
             }
         }
         .static-label-text{
@@ -141,10 +145,13 @@ button {
         }
         input {
             width: 80%;
-            margin: 10px 0;
+            margin: 10px 0 0 0;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            &.input-error {
+                // margin-bottom:35px;
+            }
         }
         .hide-password{
             display: none;
@@ -161,9 +168,13 @@ button {
             }
         }
         .error-message {
-            position: absolute;
-            top: 43px;
+            // position: absolute;
+            // top: 46px;
             font-size: 0.8rem;
+            user-select: none;
+            z-index: 1;
+            line-height: 12px;
+           
         }
     }
     .row, .column{
@@ -186,7 +197,7 @@ button {
         }
         .password-toggle{
             position: absolute;
-            top: 50%;
+            top: 27px;
             translate: -100% -50%;
             right: 0;
             scale: 0.8;
