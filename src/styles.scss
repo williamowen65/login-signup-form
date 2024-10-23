@@ -109,6 +109,19 @@ button {
                 font-size: 0.75rem;
             }
         }
+        .static-label-text{
+            transform: translate(0px, -7px);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            position: absolute;
+        }
+        &[for="remember-me"]{
+            translate: -84px 0;
+            input {
+                scale: 1.5;
+                transform-origin: left;
+            }
+        }
         input {
             width: 80%;
             margin: 10px 0;
@@ -159,4 +172,8 @@ button {
         }
     }
 
+    .forgot-password{
+        position: absolute;
+        bottom: 10px;
+    }
 }

@@ -11,7 +11,7 @@
 
 <body>
 
-  <div id="auth-container" auth-mode="signup">
+  <div id="auth-container" auth-mode="login">
     <form id="signup">
       <h2>Sign Up </h2>
       <div class="row">
@@ -67,17 +67,18 @@
     <form id="login">
       <h2>Log in </h2>
       <label for="username or email">
-        <span class="text">Username or Email</span>
+        <span class="text"><small>Username or Email</small></span>
         <input type="text" id="username or email" name="username or email" />
       </label>
       <label for="password-login">
-        <span class="text">Password</span>
+        <span class="text"><small>Password</small></span>
         <input type="text" id="password-login" name="password-login" />
       </label>
-      <label for="Remember me" class="row">Remember me
+      <label for="remember-me" class="row">
+        <div class="static-label-text">Remember me: </div>
         <input type="checkbox" id="Remember me" name="Remember me" />
       </label>
-      <div>Forget password</div>
+      <a href="#" class="forgot-password">Forgot password?</a>
 
     </form>
     <div class="cover left login">

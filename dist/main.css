@@ -96,6 +96,19 @@ button {
   transform: translate(0px, -7px);
   font-size: 0.75rem;
 }
+#auth-container label .static-label-text {
+  transform: translate(0px, -7px);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  position: absolute;
+}
+#auth-container label[for=remember-me] {
+  translate: -84px 0;
+}
+#auth-container label[for=remember-me] input {
+  scale: 1.5;
+  transform-origin: left;
+}
 #auth-container label input {
   width: 80%;
   margin: 10px 0;
@@ -140,4 +153,8 @@ button {
   right: 0;
   scale: 0.8;
   cursor: pointer;
+}
+#auth-container .forgot-password {
+  position: absolute;
+  bottom: 10px;
 }
