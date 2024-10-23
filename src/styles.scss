@@ -14,8 +14,10 @@ button {
     border: 1px solid #ccc;
     position: relative;
     overflow: hidden;
+
     .cover {
-        width: 400px;height: 70vh;
+        width: 400px;
+        height: 70vh;
         position: absolute;
         background-color: blue;
         transition: left 0.5s, translate 0.5s;
@@ -25,47 +27,29 @@ button {
         padding: 50px 10px;
         box-sizing: border-box;
         text-align: center;
+
         &.left {
             left: 00%
         }
+
         &.right {
             left: 100%;
             translate: -100% 0;
         }
     }
-    &[auth-mode="login"]{
-        .cover.right{
+
+    &[auth-mode="login"] {
+        .cover.right {
             translate: 0;
         }
     }
-    &[auth-mode="signup"]{
-        .cover.left{
+
+    &[auth-mode="signup"] {
+        .cover.left {
             translate: -100%;
         }
     }
-    // #divider {
-    //     position: absolute;
-    //     display: flex;
-    //     width: calc(400px * 3);
-    //     height: 70vh;
-    //     transition: left 0.5s;
-    //     &[auth-mode="login"]{
-    //         left: 0%;
-    //         width: 400px;
-    //         .middle, .signup{
-    //             display: none;
-    //         }
-    //     }
-    //     &[auth-mode="signup"]{
-    //         left: -50%;
-    //     }
-    //     .cover{
-    //         width: 400px;
-    //         &.login, &.signup{
-    //               background-color: blue;
-    //         }
-    //     }
-    // }
+
     form {
         display: flex;
         flex-direction: column;
@@ -73,4 +57,69 @@ button {
         justify-content: center;
         height: 70vh;
     }
-} 
+
+    label {
+        font-size: 1.2rem;
+        .text{
+            position: absolute;
+            z-index: 1;
+            transition: all 0.5s;
+            transform: translate(8px, 10px);
+        }
+        &.moveLabel {
+            .text{
+                transform: translate(0px, -7px);
+                font-size: 0.75rem;
+            }
+        }
+        input {
+            width: 80%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hide-password{
+            display: none;
+        }
+        .show-password{
+            display: block;
+        }
+        &[password-toggle="show"]{
+            .hide-password{
+                display: block;
+            }
+            .show-password{
+                display: none;
+            }
+        }
+    }
+    .row, .column{
+        display: flex;
+        &.column{
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    .password-container{
+        position: relative;
+
+        .password-strength{
+            background-color: blue;
+            width: 92%;
+            height: 5px;
+            position: absolute;
+            top: 42px;
+            border-radius: 0 0 5px 5px;
+        }
+        .password-toggle{
+            position: absolute;
+            top: 50%;
+            translate: -100% -50%;
+            right: 0;
+            scale: 0.8;
+            cursor: pointer;
+        }
+    }
+
+}

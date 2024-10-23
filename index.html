@@ -1,60 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Webpack App</title>
-  </head>
-  <body>
-    <h1>Hello world!</h1>
 
-    <div id="auth-container" auth-mode="login">
-      <form id="signup">
-        <h2>Sign Up </h2>
-        <label for="First Name">First Name
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Webpack App</title>
+</head>
+
+<body>
+  <h1>Hello world!</h1>
+
+  <div id="auth-container" auth-mode="signup">
+    <form id="signup">
+      <h2>Sign Up </h2>
+      <div class="row">
+        <label for="First Name">
+          <span class="text">First Name</span>
           <input type="text" id="First Name" name="First Name" />
         </label>
-        <label for="Last Name">Last Name
+        <label for="Last Name">
+          <span class="text">Last Name</span>
           <input type="text" id="Last Name" name="Last Name" />
         </label>
-        <label for="username">username
+      </div>
+      <div class="row">
+        <label for="username">
+          <span class="text">username</span>
           <input type="text" id="username" name="username" />
         </label>
-        <label for="email">email
+        <label for="email">
+          <span class="text">email</span>
           <input type="text" id="email" name="email" />
         </label>
-        <label for="Password">Password
-          <input type="text" id="Password" name="Password" />
+      </div>
+      <div class="row">
+        <label for="password" password-toggle="hide">
+          <span class="text">Password</span>
+          <div class="password-container">
+            <input type="password" id="password" name="password"/>
+            <div class="password-strength"></div>
+            <i class="password-toggle show-password fa-solid fa-eye-slash"></i>
+            <i class="password-toggle hide-password fa-solid fa-eye"></i>
+          </div>
+         
+          
         </label>
-        <label for="Confirm Password">Confirm Password
-          <input type="text" id="Confirm Password" name="Confirm Password" />
+        <label for="Confirm Password">
+          <span class="text">Confirm Password</span>
+          <input type="password" id="Confirm Password" name="Confirm Password" />
         </label>
+      </div>
+      <!-- 
         <div>Password strength indicator</div>
 
         <div>Enable 2FA</div>
         <div>Other info (gender)</div>
         <div>Profile Picture</div>
         <div>Agree to Terms</div>
-        <div>Captcha Verification</div>
-        
-        <button type="button" class="toggleAuthType">change</button>
-      </form>
-      <form id="login">
-        <h2>Log in </h2>
-        <label for="username or email">username or email
-          <input type="text" id="username or email" name="username or email" />
-        </label>
-        <label for="Password">Password
-          <input type="text" id="Password" name="Password" />
-        </label>
-        <label for="Remember me">Remember me
-          <input type="text" id="Remember me" name="Remember me" />
-        </label>
-        <div>Forget password</div>
-        <button type="button" class="toggleAuthType">change</button>
-      </form>
-        <div class="cover left login"></div>
-        <div class="cover right signup"></div>
-      </div>
-    </div>
-  </body>
+        <div>Captcha Verification</div> -->
+
+      <button type="button" class="toggleAuthType">Go to Log in</button>
+    </form>
+    <form id="login">
+      <h2>Log in </h2>
+      <label for="username or email">username or email
+        <input type="text" id="username or email" name="username or email" />
+      </label>
+      <label for="Password">Password
+        <input type="text" id="Password" name="Password" />
+      </label>
+      <label for="Remember me">Remember me
+        <input type="text" id="Remember me" name="Remember me" />
+      </label>
+      <div>Forget password</div>
+      <button type="button" class="toggleAuthType">Register new account</button>
+    </form>
+    <div class="cover left login"></div>
+    <div class="cover right signup"></div>
+  </div>
+  </div>
+</body>
+
 </html>

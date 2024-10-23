@@ -50,3 +50,61 @@ button {
   justify-content: center;
   height: 70vh;
 }
+#auth-container label {
+  font-size: 1.2rem;
+}
+#auth-container label .text {
+  position: absolute;
+  z-index: 1;
+  transition: all 0.5s;
+  transform: translate(8px, 10px);
+}
+#auth-container label.moveLabel .text {
+  transform: translate(0px, -7px);
+  font-size: 0.75rem;
+}
+#auth-container label input {
+  width: 80%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#auth-container label .hide-password {
+  display: none;
+}
+#auth-container label .show-password {
+  display: block;
+}
+#auth-container label[password-toggle=show] .hide-password {
+  display: block;
+}
+#auth-container label[password-toggle=show] .show-password {
+  display: none;
+}
+#auth-container .row, #auth-container .column {
+  display: flex;
+}
+#auth-container .row.column, #auth-container .column.column {
+  flex-direction: column;
+  align-items: center;
+}
+#auth-container .password-container {
+  position: relative;
+}
+#auth-container .password-container .password-strength {
+  background-color: blue;
+  width: 92%;
+  height: 5px;
+  position: absolute;
+  top: 42px;
+  border-radius: 0 0 5px 5px;
+}
+#auth-container .password-container .password-toggle {
+  position: absolute;
+  top: 50%;
+  translate: -100% -50%;
+  right: 0;
+  scale: 0.8;
+  cursor: pointer;
+}
