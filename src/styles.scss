@@ -215,15 +215,16 @@ button {
 }
 
 // Media query for mobile 
-@media (max-width: 800px) {
+@media only screen and (max-width: 767px) {
     #auth-container {
-   
+        margin-top: 22px;
         width: 100%;
         .cover {
             display: none;
         }
         form {
             width: 100%;
+            height: 80vh
             // display: none;
         }
         &[auth-mode="signup"]{
