@@ -18,20 +18,24 @@
         <label for="firstname">
           <span class="text">First Name</span>
           <input type="text" id="firstname" name="firstname" />
+          <div id="firstname-error" class="error-message"></div>
         </label>
         <label for="lastname">
           <span class="text">Last Name</span>
           <input type="text" id="lastname" name="lastname" />
+          <div id="lastname-error" class="error-message"></div>
         </label>
       </div>
       <div class="row">
         <label for="username">
           <span class="text">Username</span>
           <input type="text" id="username" name="username" />
+          <div id="username-error" class="error-message"></div>
         </label>
         <label for="email">
           <span class="text">Email</span>
           <input type="text" id="email" name="email" />
+          <div id="email-error" class="error-message"></div>
         </label>
       </div>
       <div class="row">
@@ -39,6 +43,7 @@
           <span class="text">Password</span>
           <div class="password-container">
             <input type="password" id="password" name="password" />
+            <div id="password-error" class="error-message"></div>
             <div class="password-strength"></div>
             <i class="password-toggle show-password fa-solid fa-eye-slash"></i>
             <i class="password-toggle hide-password fa-solid fa-eye"></i>
@@ -48,6 +53,7 @@
           <span class="text"><small>Confirm Password</small></span>
           <div class="password-container">
             <input type="password" id="confirm_password" name="confirm_password" />
+            <div id="confirm_password-error" class="error-message"></div>
             <i class="password-toggle show-password fa-solid fa-eye-slash"></i>
             <i class="password-toggle hide-password fa-solid fa-eye"></i>
           </div>
@@ -62,7 +68,7 @@
         <div>Agree to Terms</div>
         <div>Captcha Verification</div> -->
 
-        <button type="submit" onclick="event.preventDefault()">Submit</button>
+        <button type="submit">Submit</button>
     </form>
     <form id="login">
       <h2>Log in </h2>
@@ -78,8 +84,8 @@
         <div class="static-label-text">Remember me: </div>
         <input type="checkbox" id="Remember me" name="Remember me" />
       </label>
+      <button type="submit" onclick="event.preventDefault()">Submit</button>
       <a href="#" class="forgot-password">Forgot password?</a>
-
     </form>
     <div class="cover left login">
       <button type="button" class="toggleAuthType">Register new account</button>

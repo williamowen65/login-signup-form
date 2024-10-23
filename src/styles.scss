@@ -16,6 +16,21 @@ button {
     overflow: hidden;
     margin-top:50px;
 
+    button  {
+        margin-top: 40px;
+        padding: 10px;
+        font-weight: bold;;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        &[type="submit"] {
+            background-color: blue;
+        }
+        &[type="button"] {
+            background-color: #04ff36;
+            color: black;
+        }
+    }
     
 
     .cover {
@@ -91,10 +106,12 @@ button {
         justify-content: center;
         height: 70vh;
         width: 400px;
+   
     }
 
     label {
         font-size: 1.2rem;
+        position: relative;
         .text{
             position: absolute;
             z-index: 1;
@@ -142,6 +159,11 @@ button {
             .show-password{
                 display: none;
             }
+        }
+        .error-message {
+            position: absolute;
+            top: 43px;
+            font-size: 0.8rem;
         }
     }
     .row, .column{

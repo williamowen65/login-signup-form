@@ -19,6 +19,21 @@ button {
   overflow: hidden;
   margin-top: 50px;
 }
+#auth-container button {
+  margin-top: 40px;
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+#auth-container button[type=submit] {
+  background-color: blue;
+}
+#auth-container button[type=button] {
+  background-color: #04ff36;
+  color: black;
+}
 #auth-container .cover {
   z-index: 1;
   width: 400px;
@@ -83,6 +98,7 @@ button {
 }
 #auth-container label {
   font-size: 1.2rem;
+  position: relative;
 }
 #auth-container label .text {
   position: absolute;
@@ -127,6 +143,11 @@ button {
 }
 #auth-container label[password-toggle=show] .show-password {
   display: none;
+}
+#auth-container label .error-message {
+  position: absolute;
+  top: 43px;
+  font-size: 0.8rem;
 }
 #auth-container .row, #auth-container .column {
   display: flex;
