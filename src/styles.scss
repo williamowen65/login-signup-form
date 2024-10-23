@@ -1,5 +1,7 @@
 
 
+// Written with laptop first (rather than mobile first)
+
 button {
     cursor: pointer;
 }
@@ -131,13 +133,9 @@ button {
             }
         }
         .static-label-text{
-            // transform: translate(0px, -7px);
-          
             font-size: 0.75rem;
             white-space: nowrap;
-            // position: absolute;
             margin-top:4px;
-            // box-sizing: border-box;
         }
         &[for="remember-me"]{
             translate: -44px 0;
@@ -157,9 +155,6 @@ button {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            &.input-error {
-               
-            }
         }
         .hide-password{
             display: none;
@@ -176,14 +171,10 @@ button {
             }
         }
         .error-message {
-            // position: absolute;
-            // top: 46px;
             font-size: 0.8rem;
             user-select: none;
             z-index: 1;
             line-height: 12px;
-            // margin-bottom:3px;
-           
         }
     }
     .row, .column{
@@ -219,3 +210,39 @@ button {
         bottom: 10px;
     }
 }
+.mobile-view{ 
+    display: none;
+}
+
+// Media query for mobile 
+@media (max-width: 800px) {
+    #auth-container {
+   
+        width: 100%;
+        .cover {
+            display: none;
+        }
+        form {
+            width: 100%;
+            // display: none;
+        }
+        &[auth-mode="signup"]{
+            form#login {
+                display: none;
+            }
+        }
+        &[auth-mode="login"]{
+            form#signup {
+                display: none;
+            }
+        }
+       
+    }
+    .row {
+        // flex-direction: column;
+    }
+    .mobile-view{
+        display: inline-block;
+    }
+}
+

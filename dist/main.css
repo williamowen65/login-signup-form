@@ -186,3 +186,28 @@ button {
   position: absolute;
   bottom: 10px;
 }
+
+.mobile-view {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  #auth-container {
+    width: 100%;
+  }
+  #auth-container .cover {
+    display: none;
+  }
+  #auth-container form {
+    width: 100%;
+  }
+  #auth-container[auth-mode=signup] form#login {
+    display: none;
+  }
+  #auth-container[auth-mode=login] form#signup {
+    display: none;
+  }
+  .mobile-view {
+    display: inline-block;
+  }
+}
