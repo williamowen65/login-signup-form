@@ -1,4 +1,5 @@
 import authMessages from './authFormWelcomes.json'
+import LoginForm from './forms/LoginForm'
 import SignupForm from './forms/SignupForm'
 
 export function setUXEventListeners() {
@@ -81,5 +82,17 @@ export function setFormSubmitListeners() {
             confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value
         }
         signupForm.submit(formData)
+    })
+
+    // Setup login form
+    const loginForm = new LoginForm();
+    document.getElementById('login').addEventListener('submit', (e) => {
+        console.log('submitting login')
+        e.preventDefault();
+        const formData = {
+            "username-or-email": (document.getElementById('username-or-email') as HTMLInputElement).value,
+            "password-login": (document.getElementById('password-login') as HTMLInputElement).value
+        }
+        loginForm.submit(formData)
     })
 }

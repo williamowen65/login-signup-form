@@ -131,16 +131,24 @@ button {
             }
         }
         .static-label-text{
-            transform: translate(0px, -7px);
+            // transform: translate(0px, -7px);
+          
             font-size: 0.75rem;
             white-space: nowrap;
-            position: absolute;
+            // position: absolute;
+            margin-top:4px;
+            // box-sizing: border-box;
         }
         &[for="remember-me"]{
-            translate: -84px 0;
+            translate: -44px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             input {
-                scale: 1.5;
-                transform-origin: left;
+                scale: 1.3;
+                translate: 5px -5px;
+                transform-origin: top left;
+                cursor: pointer;
             }
         }
         input {
@@ -150,7 +158,7 @@ button {
             border: 1px solid #ccc;
             border-radius: 5px;
             &.input-error {
-                // margin-bottom:35px;
+               
             }
         }
         .hide-password{
@@ -174,6 +182,7 @@ button {
             user-select: none;
             z-index: 1;
             line-height: 12px;
+            // margin-bottom:3px;
            
         }
     }

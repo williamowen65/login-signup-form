@@ -72,19 +72,21 @@
     </form>
     <form id="login">
       <h2>Log in </h2>
-      <label for="username or email">
+      <label for="username-or-email">
         <span class="text"><small>Username or Email</small></span>
-        <input type="text" id="username or email" name="username or email" />
+        <input type="text" id="username-or-email" name="username-or-email" />
+        <div id="username-or-email-error" class="error-message"></div>
       </label>
       <label for="password-login">
         <span class="text"><small>Password</small></span>
         <input type="text" id="password-login" name="password-login" />
+        <div id="password-login-error" class="error-message"></div>
       </label>
       <label for="remember-me" class="row">
         <div class="static-label-text">Remember me: </div>
         <input type="checkbox" id="Remember me" name="Remember me" />
       </label>
-      <button type="submit" onclick="event.preventDefault()">Submit</button>
+      <button type="submit" >Submit</button>
       <a href="#" class="forgot-password">Forgot password?</a>
     </form>
     <div class="cover left login">
