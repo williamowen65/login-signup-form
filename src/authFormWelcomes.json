@@ -1,0 +1,35 @@
+{
+    "login-messages": [
+        "Welcome back! We've missed you. Please log in to continue.",
+        "Good to see you again! Log in to pick up where you left off.",
+        "Welcome back! Ready to dive back in? Log in below.",
+        "Hey there, [Username]! Welcome back. Log in to get started.",
+        "Welcome back, [Username]! We've got your spot saved.",
+        "Good to see you again, [Username]! Log in to continue.",
+        "Welcome back! We hope you're ready for another great session.",
+        "We're glad you're here! Log in and let's get started.",
+        "It's good to see you! Log in to access your account.",
+        "Welcome back! Please log in to your account.",
+        "Log in to continue.",
+        "Hello again! Please enter your details to log in.",
+        "Welcome back! Your account is safe with us. Please log in to continue.",
+        "For your security, please log in to access your account."
+    ],
+    "signup-messages": [
+        "Join us today! Create your account to get started.",
+        "Welcome! We're excited to have you on board. Sign up to begin.",
+        "Hey there! Ready to join the [App Name] community? Sign up now!",
+        "Create your account and discover what [App Name] has to offer!",
+        "Your journey starts here! Sign up to get started.",
+        "New here? Sign up and be part of something amazing!",
+        "Sign up for free and get access to [feature/benefit].",
+        "Create your account and enjoy [benefit 1], [benefit 2], and more!",
+        "Join [App Name] and unlock exclusive features tailored just for you.",
+        "Create a new account.",
+        "Sign up to get started.",
+        "New to [App Name]? Sign up now!",
+        "Welcome! We’re thrilled to have you here. Let’s get you set up.",
+        "Hello! Ready to create your account? We’re glad to have you.",
+        "Be part of our community! Sign up to start your journey."
+    ]
+}

@@ -5,6 +5,10 @@ h1 {
   color: blue;
 }
 
+button {
+  cursor: pointer;
+}
+
 #auth-container {
   display: flex;
   justify-content: space-around;
@@ -20,6 +24,11 @@ h1 {
   position: absolute;
   background-color: blue;
   transition: left 0.5s, translate 0.5s;
+  display: flex;
+  justify-content: center;
+  padding: 50px 10px;
+  box-sizing: border-box;
+  text-align: center;
 }
 #auth-container .cover.left {
   left: 0%;
