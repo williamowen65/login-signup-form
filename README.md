@@ -7,5 +7,6 @@ This repo contains:
 - A Validator class which can be used by the forms to handle validation. (`utils/Validator`) 
 - An abstract class for creating Form Sub-Classes (`interfaces/Form`)
 
-Check it out on gh-pages.
+Check it out on gh-pages: 
+> [https://williamowen65.github.io/login-signup-form/](https://williamowen65.github.io/login-signup-form/)
 
