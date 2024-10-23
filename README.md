@@ -1,15 +1,11 @@
-# 🚀 Welcome to your new awesome project!
+# Simple Login/Signup form!
 
-This project has been created using **webpack-cli**, you can now run
 
-```
-npm run build
-```
+This repo contains:
 
-or
+- A dual form interface with a nice animation to switch between the two forms. 
+- A Validator class which can be used by the forms to handle validation. (`utils/Validator`) 
+- An abstract class for creating Form Sub-Classes (`interfaces/Form`)
 
-```
-yarn build
-```
+Check it out on gh-pages.
 
-to bundle your application
