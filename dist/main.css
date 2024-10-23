@@ -105,7 +105,7 @@ button {
   position: absolute;
   z-index: 1;
   transition: all 0.5s;
-  transform: translate(8px, 10px);
+  transform: translate(8px, 14px);
   user-select: none;
   cursor: text;
 }
@@ -168,7 +168,7 @@ button {
 }
 #auth-container .password-container .password-strength {
   background-color: blue;
-  width: 92%;
+  width: 91.5%;
   height: 5px;
   position: absolute;
   top: 42px;
@@ -203,6 +203,12 @@ button {
     width: 100%;
     height: 80vh;
   }
+  #auth-container form label {
+    margin-top: 10px;
+  }
+  #auth-container form label .text {
+    transform: translate(8px, 17px);
+  }
   #auth-container[auth-mode=signup] form#login {
     display: none;
   }
@@ -211,5 +217,8 @@ button {
   }
   .mobile-view {
     display: inline-block;
+  }
+  .password-strength {
+    width: 91% !important;
   }
 }
