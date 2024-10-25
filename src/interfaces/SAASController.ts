@@ -1,10 +1,9 @@
 // This files abstracts logic for interacting with Firebase
 
-import { getAuth, connectAuthEmulator  } from "firebase/auth";
-import 'firebase/firestore';
-import 'firebase/storage';
+import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+// import admin from 'firebase-admin'
+
 import { firebaseConfig } from '../config/firebaseConfig';
-import admin from 'firebase-admin'
 
 
 // connect to firebase
@@ -16,32 +15,35 @@ import { getAnalytics } from "firebase/analytics";
 
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+// const analytics = getAnalytics(app);
 
-admin.initializeApp({ projectId: "login-signup-form-2024" });
+// admin.initializeApp({ projectId: "login-signup-form-2024" });
 
 // Server as a service
 // Class for loose coupling of SAAS logic
- class SAASController {
-    public authService: AuthService;
+class SAASController {
+    app
+    auth;
+    analytics;
     constructor() {
-        this.authService = new AuthService();
-        connectAuthEmulator(auth, "http://127.0.0.1:9099");
+        this.app = initializeApp(firebaseConfig);
+        // Initialize Firebase Authentication and get a reference to the service
+        this.auth = getAuth()
+        this.analytics = getAnalytics(this.app);
+
+        connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
     }
 
     // Create a user
     async createUser(email: string, password: string) {
         try {
-            const user = await this.authService.signUp(email, password);
+            const user = await createUserWithEmailAndPassword(this.auth, email, password);
             console.log('User created successfully:', user);
 
             // Add custom claims
             // By default all users are not admin.
-            await admin.auth().setCustomUserClaims(user.uid, { admin: false });
-            console.log('Custom claims set for user:', user.uid);
+            // await admin.auth().setCustomUserClaims(user.uid, { admin: false });
+            // console.log('Custom claims set for user:', user.uid);
 
             return user;
         } catch (error) {
@@ -53,13 +55,17 @@ admin.initializeApp({ projectId: "login-signup-form-2024" });
     // Log in
     async loginUser(email: string, password: string) {
         try {
-            const user = await this.authService.signIn(email, password);
+            const user = signInWithEmailAndPassword(this.auth, email, password);
             console.log('User logged in successfully:', user);
             return user;
         } catch (error) {
             console.error('Error logging in user:', error.message);
             throw error;
         }
+    }
+
+    async logout(){
+        return signOut(this.auth)
     }
 }
 
@@ -69,38 +75,38 @@ export default new SAASController()
 
 // Class is property of SAASController
 class AuthService {
-    auth;
+    // auth;
     constructor() {
         // Initialize Firebase Auth
-        this.auth = getAuth(app);
+        // this.auth = getAuth(app);
     }
 
     // Method to sign up a new user
-    async signUp(email: string, password: string) {
-        try {
-            const userCredential = await this.auth.createUserWithEmailAndPassword(email, password);
-            return userCredential.user;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
+    // async signUp(email: string, password: string) {
+    //     try {
+    //         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    //         return userCredential.user;
+    //     } catch (error) {
+    //         throw new Error(error.message);
+    //     }
+    // }
 
-    // Method to sign in an existing user
-    async signIn(email: string, password: string) {
-        try {
-            const userCredential = await this.auth.signInWithEmailAndPassword(email, password);
-            return userCredential.user;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
+    // // Method to sign in an existing user
+    // async signIn(email: string, password: string) {
+    //     try {
+    //         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    //         return userCredential.user;
+    //     } catch (error) {
+    //         throw new Error(error.message);
+    //     }
+    // }
 
     // Method to sign out the current user
-    async signOut() {
-        try {
-            await this.auth.signOut();
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
+    // async signOut() {
+    //     try {
+    //         await this.auth.signOut();
+    //     } catch (error) {
+    //         throw new Error(error.message);
+    //     }
+    // }
 }

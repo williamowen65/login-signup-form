@@ -67,7 +67,7 @@ export function writeFriendlyMessage() {
         document.querySelector('.signup').insertAdjacentHTML('afterbegin', `<h2>${signupMessage}</h2>`)
 }
 
-export function setFormSubmitListeners() {
+export function setFormSubmitListeners(options = {}) {
     // Setup signup form
     const signupForm = new SignupForm();
     document.getElementById('signup').addEventListener('submit', (e) => {
@@ -90,9 +90,11 @@ export function setFormSubmitListeners() {
         console.log('submitting login')
         e.preventDefault();
         const formData = {
-            "username-or-email": (document.getElementById('username-or-email') as HTMLInputElement).value,
+            "email-login": (document.getElementById('email-login') as HTMLInputElement).value,
             "password-login": (document.getElementById('password-login') as HTMLInputElement).value
         }
         loginForm.submit(formData)
     })
+
+    // Set up analytics
 }

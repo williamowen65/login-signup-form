@@ -9,7 +9,7 @@
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Login/Signup Form</title>
-<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+<script defer src="main/bundle.js"></script><link href="main.css" rel="stylesheet"></head>
 
 <body>
 
@@ -78,10 +78,10 @@
     </form>
     <form id="login">
       <h2>Log in </h2>
-      <label for="username-or-email">
+      <label for="email-login">
         <span class="text"><small>Username or Email</small></span>
-        <input type="text" id="username-or-email" name="username-or-email" />
-        <div id="username-or-email-error" class="error-message"></div>
+        <input type="text" id="email-login" name="email-login" />
+        <div id="email-login-error" class="error-message"></div>
       </label>
       <label for="password-login">
         <span class="text"><small>Password</small></span>
@@ -99,14 +99,10 @@
       </div>
       <a href="#" class="forgot-password">Forgot password?</a>
     </form>
-
-    <!-- Panels which animate between forms -->
     <div class="cover left login">
-      <!-- Content injected to display welcome message -->
       <button type="button" class="toggleAuthType">Register new account</button>
     </div>
     <div class="cover right signup">
-      <!-- Content injected to display welcome message -->
       <button type="button" class="toggleAuthType">Go to Log in</button>
     </div>
   </div>

@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const fs = require('fs');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -11,17 +12,41 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 
 
+// Function to get entry points from pages directory
+const getEntryPoints = (dir) => {
+    const entries = {};
+    fs.readdirSync(dir).forEach(file => {
+        const fullPath = path.join(dir, file);
+        if (fs.lstatSync(fullPath).isDirectory()) {
+            entries[file] = path.join(fullPath, 'index.ts');
+        }
+    });
+    return entries;
+};
+
+const entryPoints = getEntryPoints(path.resolve(__dirname, 'src/pages'));
+
 const config = {
-    entry: './src/index.ts',
+    entry: {
+        main: './src/index.ts',
+        welcome: './src/pages/welcome/index.ts',
+        ...entryPoints
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        filename: '[name]/bundle.js',
         clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
+            chunks: ['main'],
         }),
-
+        new HtmlWebpackPlugin({
+            filename: 'welcome.html',
+            template: './src/pages/welcome/index.html',
+            chunks: ['welcome'],
+        }),
         new MiniCssExtractPlugin(),
 
         // Add your plugins here
