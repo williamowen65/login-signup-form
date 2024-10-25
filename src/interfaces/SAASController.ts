@@ -2,7 +2,6 @@
 // @TODO: Implement validatePassword
 import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword, onAuthStateChanged } from "firebase/auth";
 // import admin from 'firebase-admin'
-
 import { firebaseConfig } from '../config/firebaseConfig';
 
 
@@ -53,14 +52,23 @@ class AuthService {
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute})
-            this.addRoute('/dist/index.html', () => { document.location.href = "/dist/welcome.html"}, undefined); // the login page
-            this.addRoute('/dist/', () => { document.location.href = "/dist/welcome.html"}, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, () => document.location.href = "/dist/index.html"); // the login page      
+            this.addRoute('/dist/index.html', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
+            this.addRoute('/dist/', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html');}, undefined); // the login page
+            this.addRoute('/dist/welcome.html', undefined, () => this.pushToHistory({page: 'home'}, 'Home Page', '/dist/index.html');); // the login page      
         } catch (error) {
             console.log("Error initializing routes", error)
         }
-        
     }
+    // Add a new state to the history stack
+    pushToHistory(state: object, title: string, url: string) {
+        window.history.pushState(state, title, url);
+        window.location.href= url;
+    }
+  
+//   // Example usage
+//   const data = { page: 'about' };
+//   pushToHistory(data, 'About Page', '/about'); 
+    
 
     private watchRoutes() {
         // Watch for route changes

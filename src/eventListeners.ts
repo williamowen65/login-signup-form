@@ -92,7 +92,7 @@ export function setFormSubmitListeners(options = {}) {
         setTimeout(() => {
             signupForm.submit(formData).then(() => {
                 console.log("Form submitted successfully!");
-                document.location.href = "/dist/welcome.html"
+                SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); 
                 button.resetButton();
             }).catch(err => {
                 console.log("(client) Signup Error: ", { err })
@@ -121,7 +121,7 @@ export function setFormSubmitListeners(options = {}) {
             setTimeout(() => {
                 loginForm.submit(formData).then((user) => {
                     console.log("Form submitted successfully!", { user });
-                    document.location.href = "/dist/welcome.html"
+                    SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); 
                     button.resetButton();
                 }).catch(err => {
                     console.log("(client) login error: ", { err })

@@ -13467,18 +13467,28 @@ var AuthService = /** @class */ (function () {
     };
     // Initialize routes
     AuthService.prototype.initializeRoutes = function () {
+        var _this = this;
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute
             });
-            this.addRoute('/dist/index.html', function () { document.location.href = "/dist/welcome.html"; }, undefined); // the login page
-            this.addRoute('/dist/', function () { document.location.href = "/dist/welcome.html"; }, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, function () { return document.location.href = "/dist/index.html"; }); // the login page      
+            this.addRoute('/dist/index.html', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
+            this.addRoute('/dist/', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
+            this.addRoute('/dist/welcome.html', undefined, function () { return _this.pushToHistory({ page: 'home' }, 'Home Page', '/dist/index.html'); });
+            ; // the login page      
         }
         catch (error) {
             console.log("Error initializing routes", error);
         }
     };
+    // Add a new state to the history stack
+    AuthService.prototype.pushToHistory = function (state, title, url) {
+        window.history.pushState(state, title, url);
+        window.location.href = url;
+    };
+    //   // Example usage
+    //   const data = { page: 'about' };
+    //   pushToHistory(data, 'About Page', '/about'); 
     AuthService.prototype.watchRoutes = function () {
         // Watch for route changes
         var pathname = document.location.pathname;
@@ -18994,8 +19004,8 @@ var _a;
 (_a = document.getElementById('logout')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
     // Handle logout logic here
     console.log('User logged out');
-    _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__["default"].authService.logout()
-        .then(sayGoodbye)
+    sayGoodbye()
+        .then(function () { return _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__["default"].authService.logout(); })
         .then(function () {
         window.location.href = '/dist/';
     });

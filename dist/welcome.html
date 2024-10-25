@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<script defer src="welcome/bundle.js"></script><link href="welcome.css" rel="stylesheet"></head>
-<body>
+  <script defer src="welcome/bundle.js"></script><link href="welcome.css" rel="stylesheet"></head>
+  <body>
     <nav>
-        <ul>
-            <li><a href="#" id="logout">Logout</a></li>
-        </ul>
+      <span class="username">Hello [Name]</span>
+      <button id="logout">Logout</button>
+      
     </nav>
 
     <div id="goodbye" style="display: none;">
-        <h2>Goodbye Message</h2>
-        <p>Thank you for visiting our service. We hope to see you again soon!</p>
+    <!-- <div id="goodbye" style=""> -->
+      <h2>Goodbye Message</h2>
+      <p>Thank you for visiting our service. We hope to see you again soon!</p>
     </div>
 
-<h1>Welcome to Our Service!</h1>
-<p>We are glad to have you here.</p>
-<div>
-    <h2>User Information</h2>
-    <p><strong>Name:</strong> John Doe</p>
-    <p><strong>Email:</strong> john.doe@example.com </p>
-</div>
-</body>
+    <main>
+        <h1>Welcome to Our Service!</h1>
+        <p>We are glad to have you here.</p>
+        <div>
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+        </div>
+    </main>
+  </body>
 </html>

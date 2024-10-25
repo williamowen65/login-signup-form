@@ -13392,7 +13392,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authFormWelcomes.json */ "./src/authFormWelcomes.json");
 /* harmony import */ var _forms_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms/LoginForm */ "./src/forms/LoginForm.ts");
 /* harmony import */ var _forms_SignupForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/SignupForm */ "./src/forms/SignupForm.ts");
-/* harmony import */ var _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/classes/Button */ "./src/utils/classes/Button.ts");
+/* harmony import */ var _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interfaces/SAASController */ "./src/interfaces/SAASController.ts");
+/* harmony import */ var _utils_classes_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/classes/Button */ "./src/utils/classes/Button.ts");
+
 
 
 
@@ -13474,12 +13476,12 @@ function setFormSubmitListeners(options) {
             signup: true
         };
         signupForm.clearErrors(formData);
-        var button = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__["default"](signupEl.querySelector('button'));
+        var button = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_4__["default"](signupEl.querySelector('button'));
         button.awaitButton();
         setTimeout(function () {
             signupForm.submit(formData).then(function () {
                 console.log("Form submitted successfully!");
-                document.location.href = "/dist/welcome.html";
+                _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_3__["default"].authService.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html');
                 button.resetButton();
             }).catch(function (err) {
                 console.log("(client) Signup Error: ", { err: err });
@@ -13502,12 +13504,12 @@ function setFormSubmitListeners(options) {
         loginForm.clearErrors(formData);
         try {
             // show spinner while submission loads (SImulate loading)
-            var button_1 = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__["default"](loginEl.querySelector('button'));
+            var button_1 = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_4__["default"](loginEl.querySelector('button'));
             button_1.awaitButton();
             setTimeout(function () {
                 loginForm.submit(formData).then(function (user) {
                     console.log("Form submitted successfully!", { user: user });
-                    document.location.href = "/dist/welcome.html";
+                    _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_3__["default"].authService.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html');
                     button_1.resetButton();
                 }).catch(function (err) {
                     console.log("(client) login error: ", { err: err });
@@ -13933,18 +13935,28 @@ var AuthService = /** @class */ (function () {
     };
     // Initialize routes
     AuthService.prototype.initializeRoutes = function () {
+        var _this = this;
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute
             });
-            this.addRoute('/dist/index.html', function () { document.location.href = "/dist/welcome.html"; }, undefined); // the login page
-            this.addRoute('/dist/', function () { document.location.href = "/dist/welcome.html"; }, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, function () { return document.location.href = "/dist/index.html"; }); // the login page      
+            this.addRoute('/dist/index.html', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
+            this.addRoute('/dist/', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
+            this.addRoute('/dist/welcome.html', undefined, function () { return _this.pushToHistory({ page: 'home' }, 'Home Page', '/dist/index.html'); });
+            ; // the login page      
         }
         catch (error) {
             console.log("Error initializing routes", error);
         }
     };
+    // Add a new state to the history stack
+    AuthService.prototype.pushToHistory = function (state, title, url) {
+        window.history.pushState(state, title, url);
+        window.location.href = url;
+    };
+    //   // Example usage
+    //   const data = { page: 'about' };
+    //   pushToHistory(data, 'About Page', '/about'); 
     AuthService.prototype.watchRoutes = function () {
         // Watch for route changes
         var pathname = document.location.pathname;

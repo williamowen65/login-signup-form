@@ -8,8 +8,8 @@ import "./styles.scss"
 document.getElementById('logout')?.addEventListener('click', () => {
     // Handle logout logic here
     console.log('User logged out');
-    SASSController.authService.logout()
-    .then(sayGoodbye)
+    sayGoodbye()
+    .then(() => SASSController.authService.logout())
     .then(() => {
         window.location.href = '/dist/';
     })
