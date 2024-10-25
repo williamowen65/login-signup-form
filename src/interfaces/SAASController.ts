@@ -1,6 +1,6 @@
 // This files abstracts logic for interacting with Firebase
 // @TODO: Implement validatePassword
-import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword } from "firebase/auth";
+import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword, onAuthStateChanged } from "firebase/auth";
 // import admin from 'firebase-admin'
 
 import { firebaseConfig } from '../config/firebaseConfig';
@@ -35,6 +35,7 @@ class AuthService {
         connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
         this.initializeRoutes();
         // this.watchRoutes(); // <-- Implement this with onAuthStateChanged (https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user)
+        this.watchAuthState();
     }
 
        // Add a route to be protected
@@ -52,9 +53,9 @@ class AuthService {
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute})
-            this.addRoute('/dist/index.html', () => { document.location.href = "dist/welcome.html"}, undefined); // the login page
-            this.addRoute('/dist/', () => { document.location.href = "dist/welcome.html"}, undefined); // the login page
-            this.addRoute('/dist/welcome.html', null, () => document.location.href = "/dist/index.html"); // the login page      
+            this.addRoute('/dist/index.html', () => { document.location.href = "/dist/welcome.html"}, undefined); // the login page
+            this.addRoute('/dist/', () => { document.location.href = "/dist/welcome.html"}, undefined); // the login page
+            this.addRoute('/dist/welcome.html', undefined, () => document.location.href = "/dist/index.html"); // the login page      
         } catch (error) {
             console.log("Error initializing routes", error)
         }
@@ -66,6 +67,21 @@ class AuthService {
         const pathname = document.location.pathname;
         console.log({ pathname: pathname })
         this.protectRoute(pathname)
+    }
+
+    private watchAuthState(){
+        onAuthStateChanged(this.auth, (user) => {
+            if (user) {
+                // User is signed in.
+                const uid = user.uid;
+                console.log('User is signed in', {uid})
+            } else {
+                // User is signed out.
+                console.log('User is signed out')
+            }
+            // No matter what, protect the route
+            this.protectRoute(document.location.pathname)
+        });
     }
     
 
@@ -90,13 +106,15 @@ class AuthService {
 
     // Check if user is logged in
     isUserLoggedIn(): boolean {
+       
+
         const user = this.auth.currentUser;
         return user !== null;
     }
     // Protect page routes
      // Protect page routes
-     protectRoute(route: string) {
-        console.log({route, routes: this.routes})
+     async protectRoute(route: string) {
+        console.log({route, routes: this.routes, isUserLoggedIn: await this.isUserLoggedIn()})
         if (this.routes[route]) {
             const { callback, fallback } = this.routes[route];
             if (this.isUserLoggedIn()) {

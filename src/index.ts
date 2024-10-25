@@ -11,7 +11,7 @@ console.log({pathname: document.location.pathname,
     protectRoute: SAASController.authService.protectRoute
 })
 
-SAASController.authService.protectRoute(document.location.pathname)
+// SAASController.authService.protectRoute(document.location.pathname)
 
 
 
