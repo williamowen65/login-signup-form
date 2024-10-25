@@ -63,17 +63,18 @@ export function setUXEventListeners() {
 
 // Write a friendly message to the user
 export function writeFriendlyMessage() {
-        const loginMessage = authMessages['login-messages'][Math.floor(Math.random() * authMessages['login-messages'].length)]
-        const signupMessage = authMessages['signup-messages'][Math.floor(Math.random() * authMessages['signup-messages'].length)]
-        document.querySelectorAll('.login h2, .signup h2').forEach((el) => el.remove())
-        document.querySelector('.login').insertAdjacentHTML('afterbegin', `<h2>${loginMessage}</h2>`)
-        document.querySelector('.signup').insertAdjacentHTML('afterbegin', `<h2>${signupMessage}</h2>`)
+    const loginMessage = authMessages['login-messages'][Math.floor(Math.random() * authMessages['login-messages'].length)]
+    const signupMessage = authMessages['signup-messages'][Math.floor(Math.random() * authMessages['signup-messages'].length)]
+    document.querySelectorAll('.login h2, .signup h2').forEach((el) => el.remove())
+    document.querySelector('.login').insertAdjacentHTML('afterbegin', `<h2>${loginMessage}</h2>`)
+    document.querySelector('.signup').insertAdjacentHTML('afterbegin', `<h2>${signupMessage}</h2>`)
 }
 
 export function setFormSubmitListeners(options = {}) {
     // Setup signup form
     const signupForm = new SignupForm();
-    document.getElementById('signup').addEventListener('submit', (e) => {
+    const signupEl = document.getElementById('signup')
+    signupEl.addEventListener('submit', (e) => {
         console.log('submitting')
         e.preventDefault();
         const formData = {
@@ -82,14 +83,23 @@ export function setFormSubmitListeners(options = {}) {
             username: (document.getElementById('username') as HTMLInputElement).value,
             email: (document.getElementById('email') as HTMLInputElement).value,
             password: (document.getElementById('password') as HTMLInputElement).value,
-            confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value
+            confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value,
+            signup: true
         }
-           signupForm.submit(formData).then(() => {
+        signupForm.clearErrors(formData);
+        const button = new Button(signupEl.querySelector('button'));
+        button.awaitButton();
+        setTimeout(() => {
+            signupForm.submit(formData).then(() => {
                 console.log("Form submitted successfully!");
-                document.location.href= "/dist/welcome.html"
-             }).catch(err => {
-                console.log("CLIENT CODE ERR", {err})
-             })
+                document.location.href = "/dist/welcome.html"
+                button.resetButton();
+            }).catch(err => {
+                console.log("(client) Signup Error: ", { err })
+                signupForm.displayErrors({ "signup": ["Failed to signup. Please try again."] });
+                button.resetButton();
+            })
+        }, 2000)
     })
 
     // Setup login form
@@ -100,7 +110,8 @@ export function setFormSubmitListeners(options = {}) {
         e.preventDefault();
         const formData = {
             "email-login": (document.getElementById('email-login') as HTMLInputElement).value,
-            "password-login": (document.getElementById('password-login') as HTMLInputElement).value
+            "password-login": (document.getElementById('password-login') as HTMLInputElement).value,
+            "login": true
         }
         loginForm.clearErrors(formData);
         try {
@@ -108,23 +119,22 @@ export function setFormSubmitListeners(options = {}) {
             const button = new Button(loginEl.querySelector('button'));
             button.awaitButton();
             setTimeout(() => {
-             signInWithEmailAndPassword(SAASController.auth, formData["email-login"], formData["password-login"]).then((user) => {
-                console.log("Form submitted successfully!", {user});
-                document.location.href= "/dist/welcome.html"
-                button.resetButton();
-             }).catch(err => {
-                console.log("CLIENT CODE ERR", {err})
-                button.resetButton();
-                // Display error 
-                loginForm.displayErrors({ "login": ["Failed to log in. Please try again."]});
-             })
-
+                loginForm.submit(formData).then((user) => {
+                    console.log("Form submitted successfully!", { user });
+                    document.location.href = "/dist/welcome.html"
+                    button.resetButton();
+                }).catch(err => {
+                    console.log("(client) login error: ", { err })
+                    button.resetButton();
+                    // Display error 
+                    loginForm.displayErrors({ "login": ["Failed to log in. Please try again."] });
+                })
             }, 2000)
-        
+
         } catch (error) {
-            
+
         }
     })
-        
+
     // Set up analytics
 }

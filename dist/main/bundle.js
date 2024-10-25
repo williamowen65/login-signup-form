@@ -13389,14 +13389,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setUXEventListeners: () => (/* binding */ setUXEventListeners),
 /* harmony export */   writeFriendlyMessage: () => (/* binding */ writeFriendlyMessage)
 /* harmony export */ });
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
-/* harmony import */ var _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authFormWelcomes.json */ "./src/authFormWelcomes.json");
-/* harmony import */ var _forms_LoginForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/LoginForm */ "./src/forms/LoginForm.ts");
-/* harmony import */ var _forms_SignupForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./forms/SignupForm */ "./src/forms/SignupForm.ts");
-/* harmony import */ var _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./interfaces/SAASController */ "./src/interfaces/SAASController.ts");
-/* harmony import */ var _utils_classes_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/classes/Button */ "./src/utils/classes/Button.ts");
-
-
+/* harmony import */ var _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authFormWelcomes.json */ "./src/authFormWelcomes.json");
+/* harmony import */ var _forms_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms/LoginForm */ "./src/forms/LoginForm.ts");
+/* harmony import */ var _forms_SignupForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/SignupForm */ "./src/forms/SignupForm.ts");
+/* harmony import */ var _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/classes/Button */ "./src/utils/classes/Button.ts");
 
 
 
@@ -13454,8 +13450,8 @@ function setUXEventListeners() {
 }
 // Write a friendly message to the user
 function writeFriendlyMessage() {
-    var loginMessage = _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_1__["login-messages"][Math.floor(Math.random() * _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_1__["login-messages"].length)];
-    var signupMessage = _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_1__["signup-messages"][Math.floor(Math.random() * _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_1__["signup-messages"].length)];
+    var loginMessage = _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__["login-messages"][Math.floor(Math.random() * _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__["login-messages"].length)];
+    var signupMessage = _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__["signup-messages"][Math.floor(Math.random() * _authFormWelcomes_json__WEBPACK_IMPORTED_MODULE_0__["signup-messages"].length)];
     document.querySelectorAll('.login h2, .signup h2').forEach(function (el) { return el.remove(); });
     document.querySelector('.login').insertAdjacentHTML('afterbegin', "<h2>".concat(loginMessage, "</h2>"));
     document.querySelector('.signup').insertAdjacentHTML('afterbegin', "<h2>".concat(signupMessage, "</h2>"));
@@ -13463,8 +13459,9 @@ function writeFriendlyMessage() {
 function setFormSubmitListeners(options) {
     if (options === void 0) { options = {}; }
     // Setup signup form
-    var signupForm = new _forms_SignupForm__WEBPACK_IMPORTED_MODULE_3__["default"]();
-    document.getElementById('signup').addEventListener('submit', function (e) {
+    var signupForm = new _forms_SignupForm__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    var signupEl = document.getElementById('signup');
+    signupEl.addEventListener('submit', function (e) {
         console.log('submitting');
         e.preventDefault();
         var formData = {
@@ -13473,55 +13470,52 @@ function setFormSubmitListeners(options) {
             username: document.getElementById('username').value,
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
-            confirm_password: document.getElementById('confirm_password').value
+            confirm_password: document.getElementById('confirm_password').value,
+            signup: true
         };
-        signupForm.submit(formData).then(function () {
-            console.log("Form submitted successfully!");
-            document.location.href = "/dist/welcome.html";
-        }).catch(function (err) {
-            console.log("CLIENT CODE ERR", { err: err });
-        });
+        signupForm.clearErrors(formData);
+        var button = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__["default"](signupEl.querySelector('button'));
+        button.awaitButton();
+        setTimeout(function () {
+            signupForm.submit(formData).then(function () {
+                console.log("Form submitted successfully!");
+                document.location.href = "/dist/welcome.html";
+                button.resetButton();
+            }).catch(function (err) {
+                console.log("(client) Signup Error: ", { err: err });
+                signupForm.displayErrors({ "signup": ["Failed to signup. Please try again."] });
+                button.resetButton();
+            });
+        }, 2000);
     });
     // Setup login form
-    var loginForm = new _forms_LoginForm__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    var loginForm = new _forms_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"]();
     var loginEl = document.getElementById('login');
     loginEl.addEventListener('submit', function (e) {
         console.log('submitting login');
         e.preventDefault();
         var formData = {
             "email-login": document.getElementById('email-login').value,
-            "password-login": document.getElementById('password-login').value
+            "password-login": document.getElementById('password-login').value,
+            "login": true
         };
         loginForm.clearErrors(formData);
         try {
             // show spinner while submission loads (SImulate loading)
-            var button_1 = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_5__["default"](loginEl.querySelector('button'));
+            var button_1 = new _utils_classes_Button__WEBPACK_IMPORTED_MODULE_3__["default"](loginEl.querySelector('button'));
             button_1.awaitButton();
             setTimeout(function () {
-                (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(_interfaces_SAASController__WEBPACK_IMPORTED_MODULE_4__["default"].auth, formData["email-login"], formData["password-login"]).then(function (user) {
+                loginForm.submit(formData).then(function (user) {
                     console.log("Form submitted successfully!", { user: user });
                     document.location.href = "/dist/welcome.html";
                     button_1.resetButton();
                 }).catch(function (err) {
-                    console.log("CLIENT CODE ERR", { err: err });
+                    console.log("(client) login error: ", { err: err });
                     button_1.resetButton();
                     // Display error 
                     loginForm.displayErrors({ "login": ["Failed to log in. Please try again."] });
                 });
             }, 2000);
-            //  button.innerHTML = '<i class="fa fa-spinner fa-spin"></i>'
-            //  setTimeout(async () => {
-            //     try {
-            //         const user = await loginForm.submit(formData)
-            //         console.log("Form submitted successfully!");
-            //     } catch (error) {
-            //         console.log("CLIENT CODE ERR", {error})
-            //     }
-            //     //  .then(( () => {
-            //     //     // document.location.href= "/dist/welcome.html"
-            //     //  })).catch(err => {
-            //     //  })
-            //   }, 1000)
         }
         catch (error) {
         }
@@ -13610,7 +13604,6 @@ var LoginForm = /** @class */ (function (_super) {
     LoginForm.prototype.submit = function (formData) {
         return __awaiter(this, void 0, void 0, function () {
             var errors;
-            var _this = this;
             return __generator(this, function (_a) {
                 this.validator.clearErrors();
                 this.clearErrors(formData);
@@ -13623,15 +13616,7 @@ var LoginForm = /** @class */ (function (_super) {
                 });
                 errors = this.validator.getErrors();
                 if (Object.keys(errors).length === 0) {
-                    this.logUserIn(formData).then(function (response) {
-                        console.log("Log in response", { response: response });
-                        // Redirect to Welcome page
-                        // window.location.href = "welcome.html";
-                    }).catch(function (err) {
-                        console.error("Error logging in:", err);
-                        _this.displayErrors({ "login-error": "Failed to log in. Please try again." });
-                        throw new Error(err.message);
-                    });
+                    return [2 /*return*/, _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_1__["default"].authService.loginUser(formData["email-login"], formData["password-login"])];
                 }
                 else {
                     console.log("Form submission failed:", { errors: errors });
@@ -13640,18 +13625,6 @@ var LoginForm = /** @class */ (function (_super) {
                     throw new Error("Something went wrong");
                 }
                 return [2 /*return*/];
-            });
-        });
-    };
-    LoginForm.prototype.logUserIn = function (formData) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_1__["default"].loginUser(formData["email-login"], formData["password-login"])];
-                    case 1: 
-                    // Use SAASController to create user
-                    return [2 /*return*/, _a.sent()];
-                }
             });
         });
     };
@@ -13761,7 +13734,7 @@ var SignupForm = /** @class */ (function (_super) {
                 errors = this.validator.getErrors();
                 if (Object.keys(errors).length === 0) {
                     console.log("Form submitted successfully!");
-                    return [2 /*return*/, this.createUserAccount(formData)]; // Promise
+                    return [2 /*return*/, _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_2__["default"].authService.createUser(formData.email, formData.password)]; // Promise
                 }
                 else {
                     console.log("Form submission failed:");
@@ -13769,19 +13742,6 @@ var SignupForm = /** @class */ (function (_super) {
                     throw new Error("Form submission failed"); // Should be caught by calling code
                 }
                 return [2 /*return*/];
-            });
-        });
-    };
-    SignupForm.prototype.createUserAccount = function (formData) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                // Use SAASController to create user
-                return [2 /*return*/, _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_2__["default"].createUser(formData.email, formData.password)
-                        .then(function (response) {
-                        console.log("User account created successfully:", response);
-                    }).catch(function (error) {
-                        console.error("Error creating user account:", error);
-                    })];
             });
         });
     };
@@ -13948,78 +13908,42 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // admin.initializeApp({ projectId: "login-signup-form-2024" });
 // Server as a service
 // Class for loose coupling of SAAS logic
-var SAASController = /** @class */ (function () {
-    function SAASController() {
-        this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(_config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__.firebaseConfig);
-        // Initialize Firebase Authentication and get a reference to the service
-        this.auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)();
-        this.analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_3__.getAnalytics)(this.app);
+// Class is property of SAASController
+var AuthService = /** @class */ (function () {
+    function AuthService(app) {
+        // Initialize Firebase Auth
+        this.auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)(app);
         (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.connectAuthEmulator)(this.auth, "http://127.0.0.1:9099");
     }
     // Create a user
-    SAASController.prototype.createUser = function (email, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(this.auth, email, password)];
-                    case 1:
-                        user = _a.sent();
-                        console.log('User created successfully:', user);
-                        // Add custom claims
-                        // By default all users are not admin.
-                        // await admin.auth().setCustomUserClaims(user.uid, { admin: false });
-                        // console.log('Custom claims set for user:', user.uid);
-                        return [2 /*return*/, user];
-                    case 2:
-                        error_1 = _a.sent();
-                        console.error('Error creating user:', error_1.message);
-                        throw error_1;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
+    // @returns promise
+    AuthService.prototype.createUser = function (email, password) {
+        return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(this.auth, email, password);
     };
     // Log in
-    SAASController.prototype.loginUser = function (email, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (res, rej) {
-                        console.log("about to login", { auth: _this.auth, email: email, password: password });
-                        // debugger;
-                        (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(_this.auth, email, password).then(function (userCredential) {
-                            console.log("success?", { userCredential: userCredential });
-                            res(userCredential);
-                        }).catch(function (err) {
-                            console.log("Err?", { err: err });
-                            rej(err.message);
-                        });
-                    })];
-            });
-        });
+    // @returns promise
+    AuthService.prototype.loginUser = function (email, password) {
+        return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(this.auth, email, password);
     };
-    SAASController.prototype.logout = function () {
+    AuthService.prototype.logout = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)(this.auth)];
             });
         });
     };
+    return AuthService;
+}());
+var SAASController = /** @class */ (function () {
+    function SAASController() {
+        this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(_config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__.firebaseConfig);
+        // Initialize Firebase Authentication and get a reference to the service
+        this.authService = new AuthService(this.app);
+        this.analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_3__.getAnalytics)(this.app);
+    }
     return SAASController;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new SAASController());
-// Class is property of SAASController
-var AuthService = /** @class */ (function () {
-    // auth;
-    function AuthService() {
-        // Initialize Firebase Auth
-        // this.auth = getAuth(app);
-    }
-    return AuthService;
-}());
 
 
 /***/ }),

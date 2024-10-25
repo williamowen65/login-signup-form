@@ -21,98 +21,49 @@ import { getAnalytics } from "firebase/analytics";
 
 // Server as a service
 // Class for loose coupling of SAAS logic
-class SAASController {
-    app
-    auth;
-    analytics;
-    constructor() {
-        this.app = initializeApp(firebaseConfig);
-        // Initialize Firebase Authentication and get a reference to the service
-        this.auth = getAuth()
-        this.analytics = getAnalytics(this.app);
 
+
+// Class is property of SAASController
+class AuthService {
+    auth;
+    constructor(app: any) {
+        // Initialize Firebase Auth
+        this.auth = getAuth(app);
         connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
     }
 
-    // Create a user
-    async createUser(email: string, password: string) {
-        try {
-            const user = await createUserWithEmailAndPassword(this.auth, email, password);
-            console.log('User created successfully:', user);
-
-            // Add custom claims
-            // By default all users are not admin.
-            // await admin.auth().setCustomUserClaims(user.uid, { admin: false });
-            // console.log('Custom claims set for user:', user.uid);
-
-            return user;
-        } catch (error) {
-            console.error('Error creating user:', error.message);
-            throw error;
-        }
+     // Create a user
+    // @returns promise
+    createUser(email: string, password: string) {
+        return createUserWithEmailAndPassword(this.auth, email, password);
     }
 
     // Log in
-    async loginUser(email: string, password: string) {
-        return new Promise((res, rej) => {
-
-            console.log("about to login", {auth: this.auth, email, password})
-            // debugger;
-            signInWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-                console.log("success?", {userCredential})
-                res(userCredential)
-            }).catch(err => {
-                console.log("Err?", {err})
-                rej(err.message)
-            })
-       
-    })
-
+    // @returns promise
+    loginUser(email: string, password: string) {
+            return signInWithEmailAndPassword(this.auth, email, password)
     }
 
     async logout(){
         return signOut(this.auth)
+    }
+
+}
+
+
+
+class SAASController {
+    app
+    authService
+    analytics;
+    constructor() {
+        this.app = initializeApp(firebaseConfig);
+        // Initialize Firebase Authentication and get a reference to the service
+        this.authService = new AuthService(this.app)
+        this.analytics = getAnalytics(this.app);
     }
 }
 
 export default new SAASController()
 
 
-
-// Class is property of SAASController
-class AuthService {
-    // auth;
-    constructor() {
-        // Initialize Firebase Auth
-        // this.auth = getAuth(app);
-    }
-
-    // Method to sign up a new user
-    // async signUp(email: string, password: string) {
-    //     try {
-    //         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    //         return userCredential.user;
-    //     } catch (error) {
-    //         throw new Error(error.message);
-    //     }
-    // }
-
-    // // Method to sign in an existing user
-    // async signIn(email: string, password: string) {
-    //     try {
-    //         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    //         return userCredential.user;
-    //     } catch (error) {
-    //         throw new Error(error.message);
-    //     }
-    // }
-
-    // Method to sign out the current user
-    // async signOut() {
-    //     try {
-    //         await this.auth.signOut();
-    //     } catch (error) {
-    //         throw new Error(error.message);
-    //     }
-    // }
-}

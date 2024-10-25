@@ -31,15 +31,7 @@ export default class LoginForm extends Form {
         const errors = this.validator.getErrors();
 
         if (Object.keys(errors).length === 0) {
-            this.logUserIn(formData).then((response) => {
-                console.log("Log in response", { response });
-                // Redirect to Welcome page
-                // window.location.href = "welcome.html";
-            }).catch((err) => {
-                console.error("Error logging in:", err);
-                this.displayErrors({ "login-error": "Failed to log in. Please try again." });
-                throw new Error(err.message)
-            });
+            return SAASController.authService.loginUser(formData["email-login"],formData["password-login"])
         } else {
             console.log("Form submission failed:", {errors});
             this.displayErrors(errors);
@@ -48,10 +40,6 @@ export default class LoginForm extends Form {
         }
     }
 
-    async logUserIn(formData: FormData) {
-        // Use SAASController to create user
-       return await SAASController.loginUser(formData["email-login"],formData["password-login"])
-       
-    }
+  
    
 }

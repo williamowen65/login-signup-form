@@ -40,7 +40,7 @@ export default class SignupForm extends Form {
         const errors = this.validator.getErrors();
         if (Object.keys(errors).length === 0) {
             console.log("Form submitted successfully!");
-            return this.createUserAccount(formData) // Promise
+            return SAASController.authService.createUser(formData.email,formData.password) // Promise
         } else {
             console.log("Form submission failed:");
             this.displayErrors(errors);
@@ -48,15 +48,7 @@ export default class SignupForm extends Form {
         }
     }
 
-    async createUserAccount(formData: FormData) {
-        // Use SAASController to create user
-       return SAASController.createUser(formData.email,formData.password)
-        .then((response: any) => {
-            console.log("User account created successfully:", response);
-        }).catch((error: any) => {
-            console.error("Error creating user account:", error);
-        });   
-    }
+ 
 
    
 

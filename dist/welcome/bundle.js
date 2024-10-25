@@ -13442,78 +13442,42 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // admin.initializeApp({ projectId: "login-signup-form-2024" });
 // Server as a service
 // Class for loose coupling of SAAS logic
-var SAASController = /** @class */ (function () {
-    function SAASController() {
-        this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(_config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__.firebaseConfig);
-        // Initialize Firebase Authentication and get a reference to the service
-        this.auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)();
-        this.analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_3__.getAnalytics)(this.app);
+// Class is property of SAASController
+var AuthService = /** @class */ (function () {
+    function AuthService(app) {
+        // Initialize Firebase Auth
+        this.auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)(app);
         (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.connectAuthEmulator)(this.auth, "http://127.0.0.1:9099");
     }
     // Create a user
-    SAASController.prototype.createUser = function (email, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(this.auth, email, password)];
-                    case 1:
-                        user = _a.sent();
-                        console.log('User created successfully:', user);
-                        // Add custom claims
-                        // By default all users are not admin.
-                        // await admin.auth().setCustomUserClaims(user.uid, { admin: false });
-                        // console.log('Custom claims set for user:', user.uid);
-                        return [2 /*return*/, user];
-                    case 2:
-                        error_1 = _a.sent();
-                        console.error('Error creating user:', error_1.message);
-                        throw error_1;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
+    // @returns promise
+    AuthService.prototype.createUser = function (email, password) {
+        return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(this.auth, email, password);
     };
     // Log in
-    SAASController.prototype.loginUser = function (email, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (res, rej) {
-                        console.log("about to login", { auth: _this.auth, email: email, password: password });
-                        // debugger;
-                        (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(_this.auth, email, password).then(function (userCredential) {
-                            console.log("success?", { userCredential: userCredential });
-                            res(userCredential);
-                        }).catch(function (err) {
-                            console.log("Err?", { err: err });
-                            rej(err.message);
-                        });
-                    })];
-            });
-        });
+    // @returns promise
+    AuthService.prototype.loginUser = function (email, password) {
+        return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(this.auth, email, password);
     };
-    SAASController.prototype.logout = function () {
+    AuthService.prototype.logout = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)(this.auth)];
             });
         });
     };
+    return AuthService;
+}());
+var SAASController = /** @class */ (function () {
+    function SAASController() {
+        this.app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(_config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__.firebaseConfig);
+        // Initialize Firebase Authentication and get a reference to the service
+        this.authService = new AuthService(this.app);
+        this.analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_3__.getAnalytics)(this.app);
+    }
     return SAASController;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new SAASController());
-// Class is property of SAASController
-var AuthService = /** @class */ (function () {
-    // auth;
-    function AuthService() {
-        // Initialize Firebase Auth
-        // this.auth = getAuth(app);
-    }
-    return AuthService;
-}());
 
 
 /***/ }),
