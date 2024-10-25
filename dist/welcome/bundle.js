@@ -18902,7 +18902,7 @@ var _a;
 (_a = document.getElementById('logout')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
     // Handle logout logic here
     console.log('User logged out');
-    _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__["default"].logout()
+    _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__["default"].authService.logout()
         .then(sayGoodbye)
         .then(function () {
         window.location.href = '/dist/';

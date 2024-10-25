@@ -4,7 +4,7 @@ import "./styles.scss"
 document.getElementById('logout')?.addEventListener('click', () => {
     // Handle logout logic here
     console.log('User logged out');
-    SASSController.logout()
+    SASSController.authService.logout()
     .then(sayGoodbye)
     .then(() => {
         window.location.href = '/dist/';

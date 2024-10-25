@@ -48,6 +48,7 @@ class AuthService {
         return signOut(this.auth)
     }
 
+    // @TODO Add logic to protect page routes
 }
 
 
