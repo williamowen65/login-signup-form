@@ -17,7 +17,7 @@ export default class SignupForm extends Form {
         super();
         this.validator = new Validator();
     }
-    submit(formData: FormData) {
+    async submit(formData: FormData) {
         this.validator.clearErrors();
         this.clearErrors(formData);
         // Define what validation to perform
@@ -40,14 +40,11 @@ export default class SignupForm extends Form {
         const errors = this.validator.getErrors();
         if (Object.keys(errors).length === 0) {
             console.log("Form submitted successfully!");
-            this.createUserAccount(formData).then(() => {
-                // Redirect to Welcome page
-                window.location.href = "welcome.html";
-                
-            })
+            return this.createUserAccount(formData) // Promise
         } else {
             console.log("Form submission failed:");
             this.displayErrors(errors);
+            throw new Error("Form submission failed"); // Should be caught by calling code
         }
     }
 

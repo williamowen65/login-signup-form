@@ -4,8 +4,8 @@ import { Validator } from "../utils/Validator";
 
 
 type FormData = {
-    email: any; 
-    password: any; 
+    "email-login": any; 
+    "password-login": any; 
 }
 export default class LoginForm extends Form {
     validator: Validator
@@ -14,7 +14,8 @@ export default class LoginForm extends Form {
         this.validator = new Validator();
     }
     // @ts-ignore
-    submit(formData: FormData) {
+    async submit(formData: FormData) {
+
         this.validator.clearErrors();
         this.clearErrors(formData);
         // Define what validation to perform
@@ -26,23 +27,31 @@ export default class LoginForm extends Form {
         });
    
 
+
         const errors = this.validator.getErrors();
+
         if (Object.keys(errors).length === 0) {
-            console.log("Form submitted successfully!");
+            this.logUserIn(formData).then((response) => {
+                console.log("Log in response", { response });
+                // Redirect to Welcome page
+                // window.location.href = "welcome.html";
+            }).catch((err) => {
+                console.error("Error logging in:", err);
+                this.displayErrors({ "login-error": "Failed to log in. Please try again." });
+                throw new Error(err.message)
+            });
         } else {
-            console.log("Form submission failed:");
+            console.log("Form submission failed:", {errors});
             this.displayErrors(errors);
+            // passing this error up to the calling code for custom handling
+            throw new Error("Something went wrong", )
         }
     }
 
     async logUserIn(formData: FormData) {
         // Use SAASController to create user
-       return SAASController.createUser(formData.email,formData.password)
-        .then((response: any) => {
-            console.log("User account created successfully:", response);
-        }).catch((error: any) => {
-            console.error("Error creating user account:", error);
-        });   
+       return await SAASController.loginUser(formData["email-login"],formData["password-login"])
+       
     }
    
 }

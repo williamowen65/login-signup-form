@@ -7,6 +7,7 @@ export abstract class Form {
     submit(formData) {};
     // @ts-ignore
     displayErrors(errors) {
+        console.log("Display Errors: ", {errors})
         for (let field in errors) {
             const inputElement = document.querySelector(`#${field}`);
             const errorElement = document.querySelector(`#${field}-error`);

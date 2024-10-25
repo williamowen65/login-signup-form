@@ -54,14 +54,20 @@ class SAASController {
 
     // Log in
     async loginUser(email: string, password: string) {
-        try {
-            const user = signInWithEmailAndPassword(this.auth, email, password);
-            console.log('User logged in successfully:', user);
-            return user;
-        } catch (error) {
-            console.error('Error logging in user:', error.message);
-            throw error;
-        }
+        return new Promise((res, rej) => {
+
+            console.log("about to login", {auth: this.auth, email, password})
+            // debugger;
+            signInWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
+                console.log("success?", {userCredential})
+                res(userCredential)
+            }).catch(err => {
+                console.log("Err?", {err})
+                rej(err.message)
+            })
+       
+    })
+
     }
 
     async logout(){

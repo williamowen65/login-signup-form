@@ -1,4 +1,5 @@
 import SASSController from '../../interfaces/SAASController';
+import "./styles.scss"
 
 document.getElementById('logout')?.addEventListener('click', () => {
     // Handle logout logic here
@@ -12,7 +13,7 @@ document.getElementById('logout')?.addEventListener('click', () => {
 
 async function sayGoodbye(){
     return new Promise((res, rej) => {
-        
+        (document.querySelector('#goodbye') as HTMLElement).style.display = 'block'
         setTimeout(() => {
             res(null)
         },4000)

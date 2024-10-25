@@ -1,6 +1,9 @@
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import authMessages from './authFormWelcomes.json'
 import LoginForm from './forms/LoginForm'
 import SignupForm from './forms/SignupForm'
+import SAASController from './interfaces/SAASController'
+import Button from './utils/classes/Button'
 
 export function setUXEventListeners() {
 
@@ -81,20 +84,47 @@ export function setFormSubmitListeners(options = {}) {
             password: (document.getElementById('password') as HTMLInputElement).value,
             confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value
         }
-        signupForm.submit(formData)
+           signupForm.submit(formData).then(() => {
+                console.log("Form submitted successfully!");
+                document.location.href= "/dist/welcome.html"
+             }).catch(err => {
+                console.log("CLIENT CODE ERR", {err})
+             })
     })
 
     // Setup login form
     const loginForm = new LoginForm();
-    document.getElementById('login').addEventListener('submit', (e) => {
+    const loginEl = document.getElementById('login')
+    loginEl.addEventListener('submit', (e) => {
         console.log('submitting login')
         e.preventDefault();
         const formData = {
             "email-login": (document.getElementById('email-login') as HTMLInputElement).value,
             "password-login": (document.getElementById('password-login') as HTMLInputElement).value
         }
-        loginForm.submit(formData)
-    })
+        loginForm.clearErrors(formData);
+        try {
+            // show spinner while submission loads (SImulate loading)
+            const button = new Button(loginEl.querySelector('button'));
+            button.awaitButton();
+            setTimeout(() => {
+             signInWithEmailAndPassword(SAASController.auth, formData["email-login"], formData["password-login"]).then((user) => {
+                console.log("Form submitted successfully!", {user});
+                document.location.href= "/dist/welcome.html"
+                button.resetButton();
+             }).catch(err => {
+                console.log("CLIENT CODE ERR", {err})
+                button.resetButton();
+                // Display error 
+                loginForm.displayErrors({ "login": ["Failed to log in. Please try again."]});
+             })
 
+            }, 2000)
+        
+        } catch (error) {
+            
+        }
+    })
+        
     // Set up analytics
 }

@@ -32,6 +32,7 @@ const config = {
         welcome: './src/pages/welcome/index.ts',
         ...entryPoints
     },
+    devtool: 'source-map', // Add this line to enable source maps
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name]/bundle.js',
