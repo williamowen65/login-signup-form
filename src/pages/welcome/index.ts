@@ -1,5 +1,8 @@
+import SAASController from '../../interfaces/SAASController';
 import SASSController from '../../interfaces/SAASController';
 import "./styles.scss"
+
+SAASController.authService.protectRoute(document.location.pathname)
 
 document.getElementById('logout')?.addEventListener('click', () => {
     // Handle logout logic here

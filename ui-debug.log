@@ -1,2 +1,12 @@
-Web / API server started at 127.0.0.1:4000
-Web / API server started at ::1:4000
+Failed to start server at 127.0.0.1:4001
+Error: listen EADDRINUSE: address already in use 127.0.0.1:4001
+    at Server.setupListenHandle [as _listen2] (node:net:1904:16)
+    at listenInCluster (node:net:1961:12)
+    at doListen (node:net:2135:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '127.0.0.1',
+  port: 4001
+}
