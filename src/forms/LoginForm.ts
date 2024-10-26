@@ -6,6 +6,7 @@ import { Validator } from "../utils/Validator";
 type FormData = {
     "email-login": any; 
     "password-login": any; 
+    "remember-me": boolean;
 }
 export default class LoginForm extends Form {
     validator: Validator
@@ -31,7 +32,7 @@ export default class LoginForm extends Form {
         const errors = this.validator.getErrors();
 
         if (Object.keys(errors).length === 0) {
-            return SAASController.authService.loginUser(formData["email-login"],formData["password-login"])
+            return SAASController.authService.loginUser(formData["email-login"],formData["password-login"], formData['remember-me']);
         } else {
             console.log("Form submission failed:", {errors});
             this.displayErrors(errors);

@@ -1,6 +1,6 @@
 // This files abstracts logic for interacting with Firebase
 // @TODO: Implement validatePassword
-import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword, onAuthStateChanged, setPersistence, browserLocalPersistence} from "firebase/auth";
 // import admin from 'firebase-admin'
 import { firebaseConfig } from '../config/firebaseConfig';
 
@@ -101,8 +101,16 @@ class AuthService {
 
     // Log in
     // @returns promise
-    loginUser(email: string, password: string) {
-            return signInWithEmailAndPassword(this.auth, email, password)
+    loginUser(email: string, password: string, rememberMe: boolean) {
+        console.log("Logging in user", {email, password, rememberMe, browserLocalPersistence})
+        if(rememberMe){
+            return signInWithEmailAndPassword(this.auth, email, password);
+        } else {
+            // @TODO: This don't seem to be working (the Remember be button...)
+            // Expected behavior: User should be logged out when the browser is closed
+            // Actual behavior: User is still logged in when the browser is closed
+            return setPersistence(this.auth, browserLocalPersistence).then(() => signInWithEmailAndPassword(this.auth, email, password))
+        }
     }
 
     async logout(){

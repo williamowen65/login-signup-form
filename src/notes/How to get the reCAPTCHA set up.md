@@ -1,0 +1,1 @@
+[firebase docs - Guard Your Web Content from Abuse with reCAPTCHA and Firebase](https://firebase.blog/posts/2017/08/guard-your-web-content-from-abuse-with)

@@ -84,7 +84,8 @@ export function setFormSubmitListeners(options = {}) {
             email: (document.getElementById('email') as HTMLInputElement).value,
             password: (document.getElementById('password') as HTMLInputElement).value,
             confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value,
-            signup: true
+            signup: true,
+
         }
         signupForm.clearErrors(formData);
         const button = new Button(signupEl.querySelector('button'));
@@ -111,7 +112,8 @@ export function setFormSubmitListeners(options = {}) {
         const formData = {
             "email-login": (document.getElementById('email-login') as HTMLInputElement).value,
             "password-login": (document.getElementById('password-login') as HTMLInputElement).value,
-            "login": true
+            "login": true,
+            "remember-me": (document.getElementById('remember-me') as HTMLInputElement).checked
         }
         loginForm.clearErrors(formData);
         try {
