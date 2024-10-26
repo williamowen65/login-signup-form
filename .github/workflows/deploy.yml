@@ -28,18 +28,22 @@ jobs:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: npm run build  # Adjust this command if your build script is different
  
-      - name: Log to Console
+      - name: Log to Console 2.0
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          TEST_KEY: ${{ secrets.TEST_KEY }}
         run: |
-          echo "This is a log message."
-          echo "Another log message for debugging purposes."
-          echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
-          echo "TEST_KEY: ${{ secrets.TEST_KEY }}"
+          if [ -z "$FIREBASE_API_KEY" ]; then 
+            echo "FIREBASE_API_KEY is not set"; 
+          else 
+            echo "FIREBASE_API_KEY is set"; 
+          fi
 
-      - name: Log to Console2.0
-        run: |
-          if [ -z "${{ secrets.FIREBASE_API_KEY }}" ]; then echo "FIREBASE_API_KEY is not set"; else echo "FIREBASE_API_KEY is set"; fi
-          if [ -z "${{ secrets.TEST_KEY }}" ]; then echo "TEST_KEY is not set"; else echo "TEST_KEY is set"; fi
-
+          if [ -z "$TEST_KEY" ]; then 
+            echo "TEST_KEY is not set"; 
+          else 
+            echo "TEST_KEY is set"; 
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

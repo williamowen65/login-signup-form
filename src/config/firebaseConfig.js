@@ -10,4 +10,3 @@ export const firebaseConfig = {
     measurementId: "G-0RXJS82H3H"
   };
   
-  console.log({firebaseConfig})
