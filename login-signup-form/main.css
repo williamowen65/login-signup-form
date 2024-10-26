@@ -187,6 +187,10 @@ button {
   bottom: 10px;
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+}
 .mobile-view {
   display: none;
 }

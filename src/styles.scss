@@ -210,6 +210,19 @@ button {
         bottom: 10px;
     }
 }
+
+.row{
+    display: flex;
+    justify-content: center;
+    // width: 400px;
+    // margin: auto;
+    // margin-top: 10px;
+    button {
+        // width: 48%;
+        // margin: auto;
+    }
+}
+
 .mobile-view{ 
     display: none;
 }
