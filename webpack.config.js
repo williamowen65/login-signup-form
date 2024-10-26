@@ -10,7 +10,6 @@ const Dotenv = require('dotenv-webpack');
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-console.log({isProduction, pe: process.env})
 
 // Function to get entry points from pages directory
 const getEntryPoints = (dir) => {
