@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
   <title>Login/Signup Form</title>
 </head>
 
@@ -70,11 +72,20 @@
         <div>Agree to Terms</div>
         <div>Captcha Verification</div> -->
 
-        <div class="row">
-          <button type="submit">Submit</button>
-          <button type="button" class="toggleAuthType mobile-view">Go to Log in</button>
-        </div>
-        <div id="signup-error" class="error-message"></div>
+
+      <form action="?" method="POST">
+        <div class="g-recaptcha" data-sitekey="6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc"></div>
+        <br />
+        <input type="submit" value="Submit">
+      </form>
+
+
+
+      <div class="row">
+        <button type="submit">Submit</button>
+        <button type="button" class="toggleAuthType mobile-view">Go to Log in</button>
+      </div>
+      <div id="signup-error" class="error-message"></div>
     </form>
     <form id="login">
       <h2>Log in </h2>
@@ -96,7 +107,7 @@
         <button type="submit">Submit</button>
         <button type="button" class="toggleAuthType mobile-view">Register new account</button>
       </div>
-        <div id="login-error" class="error-message"></div>
+      <div id="login-error" class="error-message"></div>
       <a href="#" class="forgot-password">Forgot password?</a>
     </form>
     <div class="cover left login">
@@ -108,7 +119,8 @@
   </div>
   </div>
 
-  <a href="https://github.com/williamowen65/login-signup-form" class="signature" style="position: absolute; bottom: 10px; left: 50%; translate: -50% 0;">
+  <a href="https://github.com/williamowen65/login-signup-form" class="signature"
+    style="position: absolute; bottom: 10px; left: 50%; translate: -50% 0;">
     <i class="fa-brands fa-github"></i>
     William Owen
   </a>
