@@ -44,6 +44,11 @@ jobs:
           else 
             echo "TEST_KEY is set"; 
           fi
+          if [ -z "$NODE_ENV" ]; then 
+            echo "NODE_ENV is not set"; 
+          else 
+            echo "NODE_ENV is set"; 
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
