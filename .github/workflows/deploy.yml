@@ -33,6 +33,7 @@ jobs:
           echo "This is a log message."
           echo "Another log message for debugging purposes."
           echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
+          echo "TEST_KEY: ${{ secrets.TEST_KEY }}"
 
 
       - name: Deploy to GitHub Pages
