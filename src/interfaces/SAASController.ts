@@ -31,7 +31,7 @@ class AuthService {
         console.log('Initializing Auth Service')
         // Initialize Firebase Auth
         this.auth = getAuth(app);
-        connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
+        // connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
         this.initializeRoutes();
         // this.watchRoutes(); // <-- Implement this with onAuthStateChanged (https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user)
         this.watchAuthState();
@@ -54,7 +54,7 @@ class AuthService {
                 addRoute: this.addRoute})
             this.addRoute('/dist/index.html', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
             this.addRoute('/dist/', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html');}, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, () => this.pushToHistory({page: 'home'}, 'Home Page', '/dist/index.html');); // the login page      
+            this.addRoute('/dist/welcome.html', undefined, () => this.pushToHistory({page: 'home'}, 'Home Page', '/dist/index.html')); // the login page      
         } catch (error) {
             console.log("Error initializing routes", error)
         }
