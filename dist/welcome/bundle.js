@@ -13440,7 +13440,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Initialize Firebase
 // const analytics = getAnalytics(app);
-// admin.initializeApp({ projectId: "login-signup-form-2024" });
 // Server as a service
 // Class for loose coupling of SAAS logic
 // Class is property of SAASController

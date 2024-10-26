@@ -75,3 +75,30 @@
 [info] Serving at port 8539
 
 [debug] [2024-10-26T04:50:39.053Z] Got response from /__/functions.yaml {"endpoints":{"helloWorld":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2024-10-26T04:50:44.098Z] defaultcredentials: writing to file C:\Users\willi\AppData\Roaming\firebase\william_owen.career_gmail.com_application_default_credentials.json
+[debug] [2024-10-26T04:50:44.099Z] Setting GAC to C:\Users\willi\AppData\Roaming\firebase\william_owen.career_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\willi\\AppData\\Roaming\\firebase\\william_owen.career_gmail.com_application_default_credentials.json"}}
+[info] +  functions: Loaded functions definitions from source: helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: helloWorld."}}
+[info] +  functions[us-central1-helloWorld]: http function initialized (http://127.0.0.1:5001/login-signup-form-2024/us-central1/helloWorld). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/login-signup-form-2024/us-central1/helloWorld)."}}
+[debug] [2024-10-26T04:50:44.109Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4001/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4001/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5001 │ http://127.0.0.1:4001/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5001 │ http://127.0.0.1:4001/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

@@ -16,7 +16,6 @@ import { getAnalytics } from "firebase/analytics";
 // Initialize Firebase
 // const analytics = getAnalytics(app);
 
-// admin.initializeApp({ projectId: "login-signup-form-2024" });
 
 // Server as a service
 // Class for loose coupling of SAAS logic
