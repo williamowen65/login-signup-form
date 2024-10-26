@@ -35,6 +35,11 @@ jobs:
           echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
           echo "TEST_KEY: ${{ secrets.TEST_KEY }}"
 
+      - name: Log to Console2.0
+        run: |
+          if [ -z "${{ secrets.FIREBASE_API_KEY }}" ]; then echo "FIREBASE_API_KEY is not set"; else echo "FIREBASE_API_KEY is set"; fi
+          if [ -z "${{ secrets.TEST_KEY }}" ]; then echo "TEST_KEY is not set"; else echo "TEST_KEY is set"; fi
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
