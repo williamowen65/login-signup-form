@@ -45,17 +45,6 @@ jobs:
             echo "FIREBASE_API_KEY is set: ${{ secrets.FIREBASE_API_KEY }}"; 
           fi
 
-          if [ -z "$TEST_KEY" ]; then 
-            echo "TEST_KEY is not set"; 
-          else 
-            echo "TEST_KEY is set"; 
-          fi
-          if [ -z "$NODE_ENV" ]; then 
-            echo "NODE_ENV is not set"; 
-          else 
-            echo "NODE_ENV is set"; 
-          fi
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

@@ -13,4 +13,4 @@ export const firebaseConfig = {
     measurementId: "G-0RXJS82H3H"
   };
   
-  console.log({firebaseConfig, env: process.env.FIREBASE_API_KEY})
+  console.log({firebaseConfig, env: process.env.FIREBASE_API_KEY, test: true})
