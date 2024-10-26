@@ -48,6 +48,7 @@ class AuthService {
 
     // Initialize routes
     private initializeRoutes() {
+    
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute})
