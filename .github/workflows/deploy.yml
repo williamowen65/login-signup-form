@@ -27,6 +27,13 @@ jobs:
           NODE_ENV: production
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: npm run build  # Adjust this command if your build script is different
+ 
+      - name: Log to Console
+        run: |
+          echo "This is a log message."
+          echo "Another log message for debugging purposes."
+          echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
