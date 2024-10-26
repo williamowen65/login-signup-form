@@ -1,0 +1,35 @@
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/welcome/styles.scss ***!
+  \************************************************************************************************************************/
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #333;
+  color: white;
+  height: 40px;
+}
+nav .username {
+  margin-right: 10px;
+}
+
+#goodbye {
+  text-align: center;
+  width: fit-content;
+  margin: auto;
+  background: yellow;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  grid-template-rows: 36px 79px 174px;
+  background-color: #f4f4f4;
+}
+main .welcome {
+  font-size: 2em;
+}
+
+/*# sourceMappingURL=welcome.css.map*/
