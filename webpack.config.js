@@ -4,6 +4,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
+const Dotenv = require('dotenv-webpack');
+
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -39,6 +41,7 @@ const config = {
         clean: true,
     },
     plugins: [
+        new Dotenv(),
         new HtmlWebpackPlugin({
             template: 'index.html',
             chunks: ['main'],

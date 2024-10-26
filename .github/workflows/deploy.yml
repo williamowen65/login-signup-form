@@ -23,6 +23,9 @@ jobs:
         run: npm install
 
       - name: Build project
+        env: 
+          NODE_ENV: production
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: npm run build  # Adjust this command if your build script is different
 
       - name: Deploy to GitHub Pages
