@@ -1,3 +1,4 @@
+import { root } from '../../globals';
 import SAASController from '../../interfaces/SAASController';
 import SASSController from '../../interfaces/SAASController';
 import "./styles.scss"
@@ -11,7 +12,7 @@ document.getElementById('logout')?.addEventListener('click', () => {
     sayGoodbye()
     .then(() => SASSController.authService.logout())
     .then(() => {
-        window.location.href = '/dist/';
+        window.location.href = root + '/';
     })
 });
 

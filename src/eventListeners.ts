@@ -4,6 +4,7 @@ import LoginForm from './forms/LoginForm'
 import SignupForm from './forms/SignupForm'
 import SAASController from './interfaces/SAASController'
 import Button from './utils/classes/Button'
+import { root } from './globals'
 
 export function setUXEventListeners() {
 
@@ -93,7 +94,7 @@ export function setFormSubmitListeners(options = {}) {
         setTimeout(() => {
             signupForm.submit(formData).then(() => {
                 console.log("Form submitted successfully!");
-                SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); 
+                SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', root + '/welcome.html'); 
                 button.resetButton();
             }).catch(err => {
                 console.log("(client) Signup Error: ", { err })
@@ -123,7 +124,7 @@ export function setFormSubmitListeners(options = {}) {
             setTimeout(() => {
                 loginForm.submit(formData).then((user) => {
                     console.log("Form submitted successfully!", { user });
-                    SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); 
+                    SAASController.authService.pushToHistory({page: 'welcome'}, 'Welcome Page', root + '/welcome.html'); 
                     button.resetButton();
                 }).catch(err => {
                     console.log("(client) login error: ", { err })

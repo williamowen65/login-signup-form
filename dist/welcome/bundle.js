@@ -13391,6 +13391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/firebaseConfig */ "./src/config/firebaseConfig.js");
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/esm/index.esm.js");
 /* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/esm/index.esm.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globals */ "./src/globals.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13436,6 +13437,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // Import the functions you need from the SDKs you need
 
 
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Initialize Firebase
@@ -13471,9 +13473,9 @@ var AuthService = /** @class */ (function () {
             console.log('Initializing routes', {
                 addRoute: this.addRoute
             });
-            this.addRoute('/dist/index.html', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
-            this.addRoute('/dist/', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, function () { return _this.pushToHistory({ page: 'home' }, 'Home Page', '/dist/index.html'); }); // the login page      
+            this.addRoute(_globals__WEBPACK_IMPORTED_MODULE_4__.root + '/index.html', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', _globals__WEBPACK_IMPORTED_MODULE_4__.root + '/welcome.html'); }, undefined); // the login page
+            this.addRoute(_globals__WEBPACK_IMPORTED_MODULE_4__.root + '/', function () { _this.pushToHistory({ page: 'welcome' }, 'Welcome Page', _globals__WEBPACK_IMPORTED_MODULE_4__.root + '/welcome.html'); }, undefined); // the login page
+            this.addRoute(_globals__WEBPACK_IMPORTED_MODULE_4__.root + '/welcome.html', undefined, function () { return _this.pushToHistory({ page: 'home' }, 'Home Page', _globals__WEBPACK_IMPORTED_MODULE_4__.root + '/index.html'); }); // the login page      
         }
         catch (error) {
             console.log("Error initializing routes", error);
@@ -13612,6 +13614,26 @@ const firebaseConfig = {
     measurementId: "G-0RXJS82H3H"
   };
   
+
+/***/ }),
+
+/***/ "./src/globals.js":
+/*!************************!*\
+  !*** ./src/globals.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   mode: () => (/* binding */ mode),
+/* harmony export */   root: () => (/* binding */ root)
+/* harmony export */ });
+const mode = {
+    PRODUCTION: 'production',
+    // DEVELOPMENT: 'development'
+}
+const root = mode.PRODUCTION ? "/login-sign-up-form": "/dist"
+
 
 /***/ }),
 
@@ -18966,8 +18988,9 @@ var __webpack_exports__ = {};
   !*** ./src/pages/welcome/index.ts ***!
   \************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../interfaces/SAASController */ "./src/interfaces/SAASController.ts");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.scss */ "./src/pages/welcome/styles.scss");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../globals */ "./src/globals.js");
+/* harmony import */ var _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces/SAASController */ "./src/interfaces/SAASController.ts");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/pages/welcome/styles.scss");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19007,15 +19030,16 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var _a;
 
 
+
 // console.log({document: document.location.pathname})
 // SAASController.authService.protectRoute(document.location.pathname)
 (_a = document.getElementById('logout')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
     // Handle logout logic here
     console.log('User logged out');
     sayGoodbye()
-        .then(function () { return _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_0__["default"].authService.logout(); })
+        .then(function () { return _interfaces_SAASController__WEBPACK_IMPORTED_MODULE_1__["default"].authService.logout(); })
         .then(function () {
-        window.location.href = '/dist/';
+        window.location.href = _globals__WEBPACK_IMPORTED_MODULE_0__.root + '/';
     });
 });
 function sayGoodbye() {

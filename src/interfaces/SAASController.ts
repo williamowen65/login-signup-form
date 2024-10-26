@@ -9,6 +9,7 @@ import { firebaseConfig } from '../config/firebaseConfig';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { root } from "../globals";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -52,9 +53,9 @@ class AuthService {
         try {
             console.log('Initializing routes', {
                 addRoute: this.addRoute})
-            this.addRoute('/dist/index.html', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html'); }, undefined); // the login page
-            this.addRoute('/dist/', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', '/dist/welcome.html');}, undefined); // the login page
-            this.addRoute('/dist/welcome.html', undefined, () => this.pushToHistory({page: 'home'}, 'Home Page', '/dist/index.html')); // the login page      
+            this.addRoute(root + '/index.html', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', root + '/welcome.html'); }, undefined); // the login page
+            this.addRoute(root + '/', () => { this.pushToHistory({page: 'welcome'}, 'Welcome Page', root + '/welcome.html');}, undefined); // the login page
+            this.addRoute(root + '/welcome.html', undefined, () => this.pushToHistory({page: 'home'}, 'Home Page', root + '/index.html')); // the login page      
         } catch (error) {
             console.log("Error initializing routes", error)
         }

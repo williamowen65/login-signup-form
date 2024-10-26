@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _a;
+import { root } from '../../globals';
 import SASSController from '../../interfaces/SAASController';
 import "./styles.scss";
 // console.log({document: document.location.pathname})
@@ -45,7 +46,7 @@ import "./styles.scss";
     sayGoodbye()
         .then(function () { return SASSController.authService.logout(); })
         .then(function () {
-        window.location.href = '/dist/';
+        window.location.href = root + '/';
     });
 });
 function sayGoodbye() {
