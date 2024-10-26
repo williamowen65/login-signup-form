@@ -1,3 +1,6 @@
+// use dotenv
+// import 'dotenv/config'
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
@@ -10,4 +13,4 @@ export const firebaseConfig = {
     measurementId: "G-0RXJS82H3H"
   };
   
-  console.log({firebaseConfig, env: process.env})
+  console.log({firebaseConfig, env: process.env.FIREBASE_API_KEY})
