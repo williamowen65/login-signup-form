@@ -152,7 +152,7 @@ class SAASController {
     authService
     analytics;
     constructor() {
-        console.log('Initializing SAAS Controller')
+        console.log('Initializing SAAS Controller', {firebaseConfig})
         this.app = initializeApp(firebaseConfig);
         // Initialize Firebase Authentication and get a reference to the service
         this.authService = new AuthService(this.app)
