@@ -34,7 +34,7 @@ const config = {
     },
     devtool: 'source-map', // Add this line to enable source maps
     output: {
-        path: path.resolve(__dirname, 'login-sign-up-form'),
+        path: path.resolve(__dirname, 'login-signup-form'),
         filename: '[name]/bundle.js',
         clean: true,
     },
