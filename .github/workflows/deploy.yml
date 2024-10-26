@@ -22,12 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create .env file
+        run: |
+          echo FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env
+          echo TEST_KEY=${{ secrets.TEST_KEY }} >> .env
+
       - name: Build project
         env: 
           NODE_ENV: production
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: |
-          export FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
           npm run build  # Adjust this command if your build script is different
  
       - name: Log to Console 2.0
