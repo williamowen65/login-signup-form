@@ -36,7 +36,7 @@ jobs:
           if [ -z "$FIREBASE_API_KEY" ]; then 
             echo "FIREBASE_API_KEY is not set"; 
           else 
-            echo "FIREBASE_API_KEY is set"; 
+            echo "FIREBASE_API_KEY is set: ${{ secrets.FIREBASE_API_KEY }}"; 
           fi
 
           if [ -z "$TEST_KEY" ]; then 
