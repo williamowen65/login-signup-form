@@ -11,7 +11,7 @@ type FormData = {
 export default class LoginForm extends Form {
     validator: Validator
     constructor() {
-        super();
+        super('#login');
         this.validator = new Validator();
     }
     // @ts-ignore

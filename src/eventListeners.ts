@@ -1,10 +1,16 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import authMessages from './authFormWelcomes.json'
-import LoginForm from './forms/LoginForm'
-import SignupForm from './forms/SignupForm'
 import SAASController from './interfaces/SAASController'
 import Button from './utils/classes/Button'
 import { root } from './globals'
+import LoginForm from './forms/LoginForm'
+import SignupForm from './forms/SignupForm'
+
+
+    // Setup login form
+export const loginForm = new LoginForm();
+    // Setup signup form
+  export const signupForm = new SignupForm();
 
 export function setUXEventListeners() {
 
@@ -72,8 +78,7 @@ export function writeFriendlyMessage() {
 }
 
 export function setFormSubmitListeners(options = {}) {
-    // Setup signup form
-    const signupForm = new SignupForm();
+ 
     const signupEl = document.getElementById('signup')
     signupEl.addEventListener('submit', (e) => {
         console.log('submitting')
@@ -102,10 +107,11 @@ export function setFormSubmitListeners(options = {}) {
                 button.resetButton();
             })
         }, 2000)
+
+        
     })
 
-    // Setup login form
-    const loginForm = new LoginForm();
+
     const loginEl = document.getElementById('login')
     loginEl.addEventListener('submit', (e) => {
         console.log('submitting login')

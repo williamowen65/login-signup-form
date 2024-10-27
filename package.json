@@ -8,7 +8,8 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "emulator": "firebase emulators:start"
+    "emulator": "firebase emulators:start",
+    "fn-deploy": "firebase deploy --only functions --force"
   },
   "keywords": [],
   "author": "William Owen <william.owen.dev@gmail.com>",

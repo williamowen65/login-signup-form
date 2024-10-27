@@ -14,8 +14,9 @@ type FormData = {
 export default class SignupForm extends Form {
     validator: Validator
     constructor() {
-        super();
+        super('#signup');
         this.validator = new Validator();
+        super.registerReCAPTCHA()
     }
     async submit(formData: FormData) {
         this.validator.clearErrors();

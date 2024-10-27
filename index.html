@@ -9,13 +9,62 @@
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    var verifyCallback = function (response) {
+      alert(response);
+    };
+    var widgetId1;
+    var widgetId2;
+    var onloadCallback = function () {
+
+
+      // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
+      // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
+      widgetId1 = grecaptcha.render('reCAPTCHA', {
+        'sitekey': '6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc',
+        'theme': 'light',
+        "callback": (response) => {
+          console.log("VerifyCallback: Call google function for reCAPTCHA", { response })
+          // Firebase functions defined in functions folder
+          // fetch("https://us-central1-login-signup-form-2024.cloudfunctions.net/checkRecaptcha", {
+          fetch("https://checkrecaptcha-njqpalarya-uc.a.run.app", {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `secret=${encodeURIComponent("6Le7AG0qAAAAAKHJD25jUAIc5PSw2lBAqlWFk4JI")}&response=${encodeURIComponent(response)}`
+          })
+            .then(res => res.json()) // Parse the JSON response
+            .then(data => {
+              console.log("reCAPTCHA response ", data);
+              
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+
+        }
+      })
+
+      // });
+      // widgetId2 = grecaptcha.render(document.getElementById('example2'), {
+      //   'sitekey' : 'your_site_key'
+      // });
+      // grecaptcha.render('example3', {
+      //   'sitekey' : 'your_site_key',
+      //   'callback' : verifyCallback,
+      //   'theme' : 'dark'
+      // });
+    };
+  </script>
+
 
   <title>Login/Signup Form</title>
 </head>
 
 <body>
 
-  <div id="auth-container" auth-mode="login">
+  <div id="auth-container" auth-mode="signup">
     <form id="signup">
       <h2>Sign Up </h2>
       <div class="row">
@@ -72,13 +121,8 @@
         <div>Agree to Terms</div>
         <div>Captcha Verification</div> -->
 
-
-      <form action="?" method="POST">
-        <div class="g-recaptcha" data-sitekey="6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc"></div>
-        <br />
-        <input type="submit" value="Submit">
-      </form>
-
+      <div id="reCAPTCHA"></div>
+      <!-- <div class="g-recaptcha" data-sitekey="6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc" data-callback="onReCaptcha"></div> -->
 
 
       <div class="row">
@@ -124,6 +168,9 @@
     <i class="fa-brands fa-github"></i>
     William Owen
   </a>
+
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+  </script>
 </body>
 
 </html>

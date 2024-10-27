@@ -1,5 +1,6 @@
 // This files abstracts logic for interacting with Firebase
 // @TODO: Implement validatePassword
+import {connectFunctionsEmulator, getFunctions} from 'firebase/functions'
 import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, validatePassword, onAuthStateChanged, setPersistence, browserLocalPersistence} from "firebase/auth";
 // import admin from 'firebase-admin'
 import { firebaseConfig } from '../config/firebaseConfig';
@@ -25,6 +26,7 @@ import { root } from "../globals";
 // Class is property of SAASController
 class AuthService {
     auth;
+    functions;
     routes: { [key: string]: { callback: () => void, fallback: () => void } } = {};
 
     constructor(app: any) {
@@ -32,6 +34,8 @@ class AuthService {
         // Initialize Firebase Auth
         this.auth = getAuth(app);
         // connectAuthEmulator(this.auth, "http://127.0.0.1:9099");
+        this.functions = getFunctions()
+        connectFunctionsEmulator(this.functions, "http://127.0.0.1", 9099)
         this.initializeRoutes();
         // this.watchRoutes(); // <-- Implement this with onAuthStateChanged (https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user)
         this.watchAuthState();

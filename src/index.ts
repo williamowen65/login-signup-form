@@ -1,15 +1,22 @@
 import './styles.scss';
 import {setUXEventListeners, setFormSubmitListeners, writeFriendlyMessage} from './eventListeners'
-import SignupForm from './forms/SignupForm'
-import SAASController from './interfaces/SAASController';
+import LoginForm from './forms/LoginForm';
+import SignupForm from './forms/SignupForm';
+// import SignupForm from './forms/SignupForm'
+// Class has already been instantiated
+// import SAASController from './interfaces/SAASController';
+
+
+
+
+// console.log({loginForm, signupForm})
+
 
 setUXEventListeners();
 writeFriendlyMessage();
 
 setFormSubmitListeners();
-console.log({pathname: document.location.pathname,
-    protectRoute: SAASController.authService.protectRoute
-})
+
 
 // SAASController.authService.protectRoute(document.location.pathname)
 
