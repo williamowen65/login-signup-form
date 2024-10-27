@@ -90,7 +90,9 @@ export function setFormSubmitListeners(options = {}) {
             email: (document.getElementById('email') as HTMLInputElement).value,
             password: (document.getElementById('password') as HTMLInputElement).value,
             confirm_password: (document.getElementById('confirm_password') as HTMLInputElement).value,
-            signup: true,
+            signup: true, // Adding this so the form is aware of this field
+            //@ts-ignore
+            recaptcha: document.body?.data?.recaptcha || null
 
         }
         signupForm.clearErrors(formData);

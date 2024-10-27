@@ -49,7 +49,7 @@ exports.checkRecaptcha = onRequest((req, res) => {
       headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: `secret=${encodeURIComponent('6Le7AG0qAAAAAKHJD25jUAIc5PSw2lBAqlWFk4JI)'}&response=${encodeURIComponent(response)}`
+    body: `secret=${encodeURIComponent('6Le7AG0qAAAAAKHJD25jUAIc5PSw2lBAqlWFk4JI')}&response=${encodeURIComponent(response)}`
   })
   .then(res => res.json())
   .then(data => {

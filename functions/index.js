@@ -37,13 +37,9 @@ exports.checkRecaptcha = onRequest(function (req, res) {
     fetch("https://recaptcha.google.com/recaptcha/api/siteverify", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-            /// I think this need to have a new arg.... 3rd arg... research!
-            secret: "6Le7AG0qAAAAAKHJD25jUAIc5PSw2lBAqlWFk4JI",
-            response: response
-        })
+        body: "secret=".concat(encodeURIComponent('6Le7AG0qAAAAAKHJD25jUAIc5PSw2lBAqlWFk4JI'), "&response=").concat(encodeURIComponent(response))
     })
         .then(function (res) { return res.json(); })
         .then(function (data) {

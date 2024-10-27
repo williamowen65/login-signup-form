@@ -36,8 +36,8 @@
           })
             .then(res => res.json()) // Parse the JSON response
             .then(data => {
-              console.log("reCAPTCHA response ", data);
-              
+              if(!document.body.data) document.body.data = {}
+              document.body.data.recaptcha = data
             })
             .catch(error => {
               console.error("Error:", error);
@@ -122,6 +122,7 @@
         <div>Captcha Verification</div> -->
 
       <div id="reCAPTCHA"></div>
+      <div id="recaptcha-error" class="error-message"></div>
       <!-- <div class="g-recaptcha" data-sitekey="6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc" data-callback="onReCaptcha"></div> -->
 
 

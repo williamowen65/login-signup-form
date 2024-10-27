@@ -10,6 +10,7 @@ type FormData = {
     email: any; 
     password: any; 
     confirm_password: any;
+    recaptcha: boolean;
 }
 export default class SignupForm extends Form {
     validator: Validator
@@ -37,6 +38,8 @@ export default class SignupForm extends Form {
         this.validator.isMatchingPassword(formData.password, formData.confirm_password, "confirm_password", {
             alias: "Passwords"
         });
+        console.log({formData})
+        this.validator.isRequired(formData.recaptcha, "recaptcha")
 
         const errors = this.validator.getErrors();
         if (Object.keys(errors).length === 0) {
