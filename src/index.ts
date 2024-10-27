@@ -12,9 +12,12 @@ import SignupForm from './forms/SignupForm';
 // console.log({loginForm, signupForm})
 
 
+// Various listeners 
 setUXEventListeners();
+// Writes random entry in the cover slides
 writeFriendlyMessage();
 
+// Various listeners for form submits
 setFormSubmitListeners();
 
 
