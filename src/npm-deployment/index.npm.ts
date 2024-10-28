@@ -6,6 +6,7 @@
 import { Form, SubmissionForm } from "../interfaces/Form";
 import "./components/os-form-input/index"
 import "./components/os-form/index"
+import "./components/os-form-button/index"
 
 // console.log({document: document.location.pathname})
 // SAASController.authService.protectRoute(document.location.pathname)

@@ -1,0 +1,20 @@
+button  {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    &[type="submit"] {
+        background-color: blue;
+    }
+    &[type="button"] {
+        background-color: #04ff36;
+        color: black;
+    }
+}
+
+button {
+    cursor: pointer;
+    margin-inline: 5px;
+}
