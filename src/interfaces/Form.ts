@@ -1,7 +1,8 @@
 import { Validator } from "../utils/Validator";
 
 
-export class Form {
+
+export class Form  {
     validator: Validator;
     form: HTMLFormElement;
     
@@ -10,7 +11,7 @@ export class Form {
     }
 
     // @ts-ignore
-    submit(formData) {};
+    submit(formData);
     // @ts-ignore
     displayErrors(errors) {
         console.log("Display Errors: ", {errors})

@@ -94,9 +94,12 @@ module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
         Object.assign(config, productionConfig)
+        console.log("IS prod")
+
         
     } else if (isNPM_Production) {
         config.mode = 'npm_production';
+        console.log("IS npm_prod")
         Object.assign(config, {
             entry: {
                 main: './src/npm-deployment/index.npm.ts',
@@ -109,7 +112,8 @@ module.exports = () => {
                 clean: true,
             },
             plugins: [
-                new Dotenv()       
+                new Dotenv(),
+                new MiniCssExtractPlugin() 
             ],
             module: {
                 rules: [
@@ -123,5 +127,7 @@ module.exports = () => {
         })
  
     }
+
+    console.log({config})
     return config;
 };
