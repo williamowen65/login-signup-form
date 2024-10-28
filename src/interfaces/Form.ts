@@ -1,6 +1,12 @@
 import { Validator } from "../utils/Validator";
 
+export interface SubmissionForm {
+    
+    formClass: Form;
+    // @ts-ignore
+    submit(formData);
 
+}
 
 export class Form  {
     validator: Validator;
@@ -10,8 +16,8 @@ export class Form  {
         this.form = document.querySelector(formSelector) as HTMLFormElement
     }
 
-    // @ts-ignore
-    submit(formData);
+
+    
     // @ts-ignore
     displayErrors(errors) {
         console.log("Display Errors: ", {errors})
@@ -45,29 +51,8 @@ export class Form  {
     }
 
 
-    reCAPTCHA_callback(){
-        console.log("HI from reCAPTCHA_callback")
-    }
 
-    // Add an html tag to your form <form-recaptcha ></form-recaptcha>
-    // @ts-ignore
-    registerReCAPTCHA(){
-            // Get API 
-            // function reCAPTCHA_callback(){
-            //     console.log("HI from reCAPTCHA_callback")
-            // }
-
-            // const el = this.form.querySelector("#reCAPTCHA")
-            // if(el){
-            //     el.innerHTML =  `<div class="g-recaptcha" data-sitekey="6Le7AG0qAAAAAFv2tJ7qSFBI6uCtP1XbDbGjL_lc" data-callback="reCAPTCHA_callback"></div>`
-            // }
-            
-
-            console.log("regiesterReCAPTCHA triggered")
-
-        
-            // window.location.href = "/checkRecaptcha?response=" + encodeURIComponent(response)
-    }
+   
 }
 
 /*

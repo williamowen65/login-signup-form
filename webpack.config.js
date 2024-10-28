@@ -37,18 +37,14 @@ const config = {
                 loader: 'ts-loader',
                 exclude: ['/node_modules/'],
             },
-            {
-                test: /\.s[ac]ss$/i,
-                use: [stylesHandler, 'css-loader', 'sass-loader'],
-            },
-   
+    
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+        extensions: ['.tsx', '.ts', '.jsx', '.js', '.scss'],
     },
 };
 
@@ -86,6 +82,12 @@ const productionConfig = {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
             },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [stylesHandler, 'css-loader', 'sass-loader'],
+            },
+   
+            
         ]
     }
 }
@@ -98,18 +100,17 @@ module.exports = () => {
 
         
     } else if (isNPM_Production) {
-        config.mode = 'npm_production';
+        config.mode = 'production';
+        
         console.log("IS npm_prod")
         Object.assign(config, {
-            entry: {
-                main: './src/npm-deployment/index.npm.ts',
+            entry: './src/npm-deployment/index.npm.ts',
                 // Don't include the welcome page in the entry points
                 // ...Object.values(entryPoints).filter( el => /welcome/.test(el) ? -1 : 1)
-            },
             output: {
                 path: path.resolve(__dirname, 'npm-deployment'),
-                filename: '[name]/bundle.js',
-                clean: true,
+                filename: 'osForm/bundle.js',
+                // clean: true,
             },
             plugins: [
                 new Dotenv(),
@@ -121,13 +122,18 @@ module.exports = () => {
                     {
                         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                         use: 'null-loader'
-                    }
+                    },
+                    {
+                        test: /\.txt/,
+                        use: ['raw-loader']
+                    },
+                    { test: /\.scss$/, use: ['raw-loader', 'sass-loader']},
                 ]
             }
         })
  
     }
 
-    console.log({config})
+    console.log(JSON.stringify({config},null, 2))
     return config;
 };
