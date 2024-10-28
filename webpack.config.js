@@ -99,7 +99,7 @@ module.exports = () => {
         config.mode = 'npm_production';
         Object.assign(config, {
             entry: {
-                main: './src/index.npm.ts',
+                main: './src/npm-deployment/index.npm.ts',
                 // Don't include the welcome page in the entry points
                 // ...Object.values(entryPoints).filter( el => /welcome/.test(el) ? -1 : 1)
             },
