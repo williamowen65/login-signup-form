@@ -7,13 +7,14 @@ import cssContent from "./style.scss";
 createCustomElement('os-form-input',function() {
     document.addEventListener("DOMContentLoaded", () => {
         let inputType = this.getAttribute('type') || 'text';
-        let fieldName = this.getAttribute("fieldname") || "" 
+        let fieldName = this.getAttribute("fieldname") || ""
+        let alias = this.getAttribute("alias") || "";
         console.log({this: this, fieldName})
 
     if(inputType == 'password'){
         this.shadowRoot.querySelector('div').innerHTML = `
         <label for="${fieldName}" password-toggle="hide">
-          <span class="text">${capitalizeFirstLetter(fieldName)}</span>
+          <span class="text">${alias || capitalizeFirstLetter(fieldName)}</span>
           <div class="${fieldName}-container">
             <input type="password" id="${fieldName}" name="${fieldName}" />
             <div id="password-error" class="error-message"></div>
@@ -28,7 +29,7 @@ createCustomElement('os-form-input',function() {
 
         this.shadowRoot.querySelector('div').innerHTML = `
         <label for="${fieldName}">
-        <span class="text">${capitalizeFirstLetter(fieldName)}</span>
+        <span class="text">${alias || capitalizeFirstLetter(fieldName)}</span>
         <input type="text" id="${fieldName}" name="${fieldName}" />
         <div id="${fieldName}-error" class="error-message"></div>
         </label>
@@ -73,6 +74,10 @@ createCustomElement('os-form-input',function() {
             }
         })
     })
+
+    this.value = function(){
+        return this.shadowRoot.querySelector("input").value;
+    }
 
 })
 
