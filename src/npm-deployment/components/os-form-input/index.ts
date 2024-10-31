@@ -15,7 +15,7 @@ createCustomElement('os-form-input',function() {
     if(inputType == 'password'){
         this.shadowRoot.querySelector('div').innerHTML = `
         <label for="${fieldName}" password-toggle="hide">
-          <span class="text">${alias || capitalizeFirstLetter(fieldName)}</span>
+          <small class="text">${alias || capitalizeFirstLetter(fieldName)}</small>
           <div class="${fieldName}-container">
             <input type="password" id="${fieldName}" name="${fieldName}" />
             <div id="${fieldName}-error" class="error-message"></div>
@@ -30,7 +30,7 @@ createCustomElement('os-form-input',function() {
 
         this.shadowRoot.querySelector('div').innerHTML = `
         <label for="${fieldName}">
-        <span class="text">${alias || capitalizeFirstLetter(fieldName)}</span>
+        <small class="text">${alias || capitalizeFirstLetter(fieldName)}</small>
         <input type="text" id="${fieldName}" name="${fieldName}" />
         <div id="${fieldName}-error" class="error-message"></div>
         </label>
