@@ -109,7 +109,7 @@ class OsForm implements SubmissionForm{
         }
         // The user should forced to make a submit function at some point in the workflow
         submit(formData: any){
-            this.formClass.validator.clearErrors();
+            this.formClass.clearErrors(formData);
             this.validatorCallback(formData)
             const errors = this.formClass.validator.getErrors();
             console.log("Submitted form - from osForm", {formData, errors})

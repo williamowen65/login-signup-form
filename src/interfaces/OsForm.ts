@@ -22,6 +22,7 @@ export class Form  {
     displayErrors(errors) {
         console.log("Display Errors: ", {errors})
         for (let field in errors) {
+            // Get access to shadow dom of custom element
             const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
 
             const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
@@ -36,23 +37,59 @@ export class Form  {
             }
         }
     }
-     // @ts-ignore
+
+    // @ts-ignore
     clearErrors(formData) {
+        this.validator.clearErrors();
         for (let field in formData) {
+            // Attempt to locate the os-form-input element with the specific fieldname
             const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
-
-            const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
-            const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
-
-            if (errorElement) {
-                errorElement.innerHTML = "";
-            }
-
-            if (inputElement) {
-                inputElement.classList.remove("input-error");
+            
+            if (osElement && osElement.shadowRoot) {  // Ensure osElement and shadowRoot are available
+                const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
+                const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
+                
+                console.log("Clear Errors: ", {field, formData, osElement, inputElement, errorElement});
+                
+                if (errorElement) {
+                    console.log("clearing error");
+                    errorElement.innerHTML = "";
+                    console.log("clearing error", {html: errorElement.innerHTML});
+                } else {
+                    console.warn(`Error element not found for field: ${field}`);
+                }
+    
+                if (inputElement) {
+                    inputElement.classList.remove("input-error");
+                } else {
+                    console.warn(`Input element not found for field: ${field}`);
+                }
+            } else {
+                console.warn(`os-form-input element or shadowRoot not found for field: ${field}`);
             }
         }
     }
+    
+     // @ts-ignore
+    // clearErrors(formData) {
+    //     for (let field in formData) {
+    //         // Get access to shadow dom of custom element
+    //         const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
+            
+    //         const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
+    //         const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
+            
+    //         console.log("Clear Errors: ", {field, formData, osElement, inputElement, errorElement})
+    //         if (errorElement) {
+    //             console.log("clearing error")
+    //             errorElement.innerHTML = "";
+    //         }
+
+    //         if (inputElement) {
+    //             inputElement.classList.remove("input-error");
+    //         }
+    //     }
+    // }
 
 
 
