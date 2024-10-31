@@ -11,6 +11,7 @@ export async function createCustomElement(name, onload, html, css) {
     `
 
     class customElementType extends HTMLElement {
+        validationFunction = [];
         constructor() {
             super()
             this.attachShadow({ mode: 'open' })
@@ -21,7 +22,11 @@ export async function createCustomElement(name, onload, html, css) {
             // TODO. Create method... 
             // getAttributes => object of attribute and values
             // use getAttributeNames() (https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNames)
+        }
 
+        // Method to set a custom validation function
+        setValidationFunction(validationFunction) {
+            this.validationFunction.push(validationFunction);
         }
     }
 

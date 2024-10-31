@@ -2,7 +2,7 @@ var Button = /** @class */ (function () {
     function Button(button) {
         this.button = button;
     }
-    Button.prototype.awaitButton = function () {
+    Button.prototype. = function () {
         this.button.setAttribute('disabled', 'true');
         this.button.innerHTML = 'Loading...';
     };

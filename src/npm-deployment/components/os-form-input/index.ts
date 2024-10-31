@@ -5,6 +5,7 @@ import cssContent from "./style.scss";
 
 
 createCustomElement('os-form-input',function() {
+    
     document.addEventListener("DOMContentLoaded", () => {
         let inputType = this.getAttribute('type') || 'text';
         let fieldName = this.getAttribute("fieldname") || ""
@@ -78,6 +79,9 @@ createCustomElement('os-form-input',function() {
     this.value = function(){
         return this.shadowRoot.querySelector("input").value;
     }
+    
+   
+
 
 })
 

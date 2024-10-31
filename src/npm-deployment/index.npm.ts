@@ -4,6 +4,7 @@
 // import "./styles.scss"
 
 import { Form, SubmissionForm } from "../interfaces/Form";
+import { Validator } from "../utils/Validator";
 import "./components/os-form-input/index"
 import "./components/os-form/index"
 import "./components/os-form-button/index"
@@ -89,25 +90,41 @@ I want to be able to pass is via custom component.
 // 
 
 // This Class is like signup/login
+// This is a class that the client can use to do the following:
+// 1. Define the form by passing in the form selector
+// 2. Define validation for the form
+
 class OsForm implements SubmissionForm{
         formClass: Form;
-        constructor(formSelector: string){
+        validatorCallback: Function;
+        constructor(formSelector: string, validator: Validator, validatorCallback: Function){
             // super(formSelector);
             this.formClass = new Form(formSelector)
+            this.formClass.validator = validator
+            this.validatorCallback = validatorCallback
+           ;
         }
         // The user should forced to make a submit function at some point in the workflow
         submit(formData: any){
-            console.log("Submitted form")
+            this.validatorCallback(this.formClass.validator)
+            console.log("Submitted form - from osForm")
         }
 
         // This might be a function better suited to be defined in the Form Class, becuase it can be "under the hood"
         
         defineComponents(){
-            
-
-           // Get every file that is in components and use the file name as the tagname.
-           // for each one, get the html, css, and logic
+            // Components are defined as html components on load
         }
+
+         // Method to set a custom validation function
+        setValidationFunction(selector:string, validationFunction: Function) {
+
+           const input =  this.formClass.form.querySelector(`[fieldName="${selector}"]`) 
+           //@ts-ignore
+           input.setValidationFunction(validationFunction)
+           console.log({input, formClass: this.formClass})
+        }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

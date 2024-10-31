@@ -97,7 +97,8 @@ export function setFormSubmitListeners(options = {}) {
         }
         signupForm.clearErrors(formData);
         const button = new Button(signupEl.querySelector('button'));
-        button.awaitButton();
+        button.awaitButton(); // <-- Show loading spinner "Loading..."
+        // This set timeout is to simulate a loading time
         setTimeout(() => {
             signupForm.submit(formData).then(() => {
                 console.log("Form submitted successfully!");
