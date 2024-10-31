@@ -4,6 +4,7 @@ export async function createCustomElement(name, onload, html, css) {
 
 
     template.innerHTML = `
+    
     <style>
         ${css}
     </style>
