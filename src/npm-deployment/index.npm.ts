@@ -3,8 +3,8 @@
 // import SASSController from './interfaces/SAASController';
 // import "./styles.scss"
 
-import { Form, SubmissionForm } from "../interfaces/Form";
-import { Validator } from "../utils/Validator";
+import { Form, SubmissionForm } from "../interfaces/OsForm";
+import { Validator } from "../utils/validation/OsValidator"; // local validator
 import "./components/os-form-input/index"
 import "./components/os-form/index"
 import "./components/os-form-button/index"
@@ -94,34 +94,54 @@ I want to be able to pass is via custom component.
 // 1. Define the form by passing in the form selector
 // 2. Define validation for the form
 
+
+
 class OsForm implements SubmissionForm{
         formClass: Form;
         validatorCallback: Function;
-        constructor(formSelector: string, validator: Validator, validatorCallback: Function){
+        constructor(formSelector: string, validator: Validator){
             // super(formSelector);
             this.formClass = new Form(formSelector)
-            this.formClass.validator = validator
-            this.validatorCallback = validatorCallback
-           ;
+            //@ts-ignore
+            this.formClass.form.OsForm = this;
+            console.log("init form", {formClass: this.formClass})
+            this.formClass.validator = validator;
         }
         // The user should forced to make a submit function at some point in the workflow
         submit(formData: any){
-            this.validatorCallback(this.formClass.validator)
-            console.log("Submitted form - from osForm")
+            this.formClass.validator.clearErrors();
+            this.validatorCallback(formData)
+            const errors = this.formClass.validator.getErrors();
+            console.log("Submitted form - from osForm", {formData, errors})
+
+            if (Object.keys(errors).length === 0) {
+                console.log("Form submitted successfully!");
+            //     return SAASController.authService.createUser(formData.email,formData.password) // Promise
+            } else {
+                console.log("Form submission failed: ", errors);
+                this.formClass.displayErrors(errors);
+                // throw new Error("Form submission failed"); // Should be caught by calling code
+            }
+
         }
 
         // This might be a function better suited to be defined in the Form Class, becuase it can be "under the hood"
         
-        defineComponents(){
+        defineComponents(){ // not used
             // Components are defined as html components on load
         }
 
+        setValidation(validationFunction: Function){
+            console.log("setValidation",{validationFunction})
+            this.validatorCallback = validationFunction
+        }
+
          // Method to set a custom validation function
-        setValidationFunction(selector:string, validationFunction: Function) {
+        setInputValidation(selector:string, validationFunction: Function) {
 
            const input =  this.formClass.form.querySelector(`[fieldName="${selector}"]`) 
            //@ts-ignore
-           input.setValidationFunction(validationFunction)
+           input.setInputValidation(validationFunction)
            console.log({input, formClass: this.formClass})
         }
 
@@ -130,6 +150,8 @@ class OsForm implements SubmissionForm{
 document.addEventListener("DOMContentLoaded", () => {
     // @ts-ignore
     window.OsForm = OsForm
+    // @ts-ignore
+    window.OsValidator = Validator
     console.log({window})
 })
 

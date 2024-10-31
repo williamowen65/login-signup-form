@@ -25,7 +25,7 @@ export async function createCustomElement(name, onload, html, css) {
         }
 
         // Method to set a custom validation function
-        setValidationFunction(validationFunction) {
+        setInputValidation(validationFunction) {
             this.validationFunction.push(validationFunction);
         }
     }

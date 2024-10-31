@@ -1,5 +1,5 @@
 
-import {capitalizeFirstLetter} from './stringMethods';
+import {capitalizeFirstLetter} from '../stringMethods';
 
 export class Validator{
     constructor(){

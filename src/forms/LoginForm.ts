@@ -1,6 +1,6 @@
 import { Form } from "../interfaces/Form";
 import SAASController from "../interfaces/SAASController";
-import { Validator } from "../utils/Validator";
+import { Validator } from "../utils/validation/Validator";
 
 
 type FormData = {

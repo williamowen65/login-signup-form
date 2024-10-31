@@ -1,5 +1,5 @@
 import { Form } from "../interfaces/Form";
-import { Validator } from "../utils/Validator";
+import { Validator } from "../utils/validation/Validator";
 import SAASController from "../interfaces/SAASController";
 
 

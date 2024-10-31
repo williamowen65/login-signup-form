@@ -3,7 +3,7 @@ import { createCustomElement } from "../../utils/custom-element";
 //@ts-ignore
 import cssContent from "./style.scss";
 
-
+/* IMPORTANT NOTE: Validation is set on the inputs via the src\npm-deployment\components\os-form\index.ts */
 createCustomElement('os-form-input',function() {
     
     document.addEventListener("DOMContentLoaded", () => {

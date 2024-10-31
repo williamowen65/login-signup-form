@@ -41,18 +41,23 @@ createCustomElement('os-form', function () {
 
         function defineOSInputValues(){
             let inputs = Array.from(this.querySelectorAll("os-form-input"))
-            const values = inputs.map(inputShadowDom => {
+            const values = inputs.reduce((acc, inputShadowDom) => {
                 //@ts-ignore
                 const input = inputShadowDom.shadowRoot.querySelector("input")
-                // maps objects to their values
-                return { [input.name]: {
+                //@ts-ignore
+                acc[input.name] = {
+                    fieldName: input.name,
                     value: input.value,
                     type: input.type,
                     //@ts-ignore
                     alias: inputShadowDom.getAttribute("alias"),
-                    input
-                } }
-            })
+                    input,
+                    //@ts-ignore
+                    validation: inputShadowDom.validationFunction
+                } 
+                // maps objects to their values
+                return acc
+            }, {})
             return values
         }
 
@@ -64,12 +69,6 @@ createCustomElement('os-form', function () {
             //  The inputs are not directly accessible from the form element.
             const values = defineOSInputValues.bind(this)();
             
-
-
-
-        
-
-
             console.log({values, OsForm: this})
 
             const submit = new Event("submit", {
@@ -84,13 +83,19 @@ createCustomElement('os-form', function () {
             }));
         });
 
-
+        /*
+        The submit event is kind of tricky because of the shadow dom. The form element is isolated from the inputs.
+        It's possible formSubmit and submit events could be combined... (Check with os-form-button which dispatched the formSubmit event)
+        but the actual submit triggers the submit logic in the main form class. OsForm.submit() (index.npm.ts)
+        */
         form.addEventListener("submit", (e: Event) => {
             e.preventDefault()
-
-            console.log("Local form submit");
+            
+            // console.log("Local form submit");
             const eventDetail = (e as CustomEvent).detail;
             console.log("Form values from event:", eventDetail.values);
+            // console.log({this:this, "test":this.OsForm})
+            this.OsForm.submit(eventDetail.values)
         })
 
 

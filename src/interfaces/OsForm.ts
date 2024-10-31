@@ -22,8 +22,10 @@ export class Form  {
     displayErrors(errors) {
         console.log("Display Errors: ", {errors})
         for (let field in errors) {
-            const inputElement = document.querySelector(`#${field}`);
-            const errorElement = document.querySelector(`#${field}-error`);
+            const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
+
+            const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
+            const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
 
             if (errorElement) {
                 errorElement.innerHTML = `<small>${errors[field][0]}</small>`
@@ -37,8 +39,10 @@ export class Form  {
      // @ts-ignore
     clearErrors(formData) {
         for (let field in formData) {
-            const inputElement = document.querySelector(`#${field}`);
-            const errorElement = document.querySelector(`#${field}-error`);
+            const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
+
+            const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
+            const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
 
             if (errorElement) {
                 errorElement.innerHTML = "";
