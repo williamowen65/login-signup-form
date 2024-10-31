@@ -13,10 +13,10 @@ export class Validator{
         }
         return true;
     }
-    isEmail(value, fieldName){
+    isEmail(osInputData = {}){
         const emailPattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-        if(!emailPattern.test(value)){
-            this.addError(fieldName, `${capitalizeFirstLetter(fieldName)} is not a valid email`);
+        if(!emailPattern.test(osInputData.value)){
+            this.addError(osInputData.fieldName, `${capitalizeFirstLetter(osInputData.fieldName)} is not a valid email`);
             return false;
         }
         return true;
@@ -28,9 +28,10 @@ export class Validator{
         }
         return true;
     }
-    isMatchingPassword(value1, value2, fieldName, options = {}){
-        if(value1 !== value2){
-            this.addError(fieldName, `${options.alias || capitalizeFirstLetter(fieldName)} do not match`);
+    // isMatchingPassword(value1, value2, fieldName, options = {}){
+    isMatchingPassword(osInputData1, osInputData2, options= {}){
+        if(osInputData1.value !== osInputData2.value){
+            this.addError(osInputData1.fieldName, `${options.alias || osInputData1.alias || capitalizeFirstLetter(osInputData1.fieldName)} do not match`);
             return false;
         }
         return true;

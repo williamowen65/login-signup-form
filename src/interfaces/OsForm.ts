@@ -39,9 +39,10 @@ export class Form  {
     }
 
     // @ts-ignore
-    clearErrors(formData) {
-        this.validator.clearErrors();
+    clearErrors(formData) { // <-- Clear the errors in the UI
+        this.validator.clearErrors(); // <-- Clears the data object holding the errors
         for (let field in formData) {
+            console.log("Clear Errors: ", {field, formData})
             // Attempt to locate the os-form-input element with the specific fieldname
             const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
             
@@ -52,9 +53,7 @@ export class Form  {
                 console.log("Clear Errors: ", {field, formData, osElement, inputElement, errorElement});
                 
                 if (errorElement) {
-                    console.log("clearing error");
                     errorElement.innerHTML = "";
-                    console.log("clearing error", {html: errorElement.innerHTML});
                 } else {
                     console.warn(`Error element not found for field: ${field}`);
                 }

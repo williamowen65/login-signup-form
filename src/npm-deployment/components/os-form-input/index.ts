@@ -18,10 +18,10 @@ createCustomElement('os-form-input',function() {
           <span class="text">${alias || capitalizeFirstLetter(fieldName)}</span>
           <div class="${fieldName}-container">
             <input type="password" id="${fieldName}" name="${fieldName}" />
-            <div id="password-error" class="error-message"></div>
-            <div class="password-strength"></div>
-            <i class="password-toggle show-password fa-solid fa-eye-slash"></i>
-            <i class="password-toggle hide-password fa-solid fa-eye"></i>
+            <div id="${fieldName}-error" class="error-message"></div>
+            <div class="${fieldName}-strength"></div>
+            <i class="${fieldName}-toggle show-${fieldName} fa-solid fa-eye-slash"></i>
+            <i class="${fieldName}-toggle hide-${fieldName} fa-solid fa-eye"></i>
           </div>
         </label>
         
