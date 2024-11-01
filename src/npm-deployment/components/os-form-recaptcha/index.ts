@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.head.appendChild(script);
     
     const script2 = document.createElement('script');
-    script2.src = "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit";
+    script2.src = "https://www.google.com/recaptcha/api.js?onload=OsReCaptchaCallback&render=explicit";
     script2.async = true;
     script2.defer = true;
     document.body.appendChild(script2);
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
     var widgetId1;
-    window.onloadCallback = function () {
+    window.OsReCaptchaCallback = function () {
     
         // 
         // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
