@@ -8,7 +8,11 @@ import { Validator } from "../utils/validation/OsValidator"; // local validator
 import "./components/os-form-input/index"
 import "./components/os-form/index"
 import "./components/os-form-button/index"
+import "./components/os-form-recaptcha/index"
 
+
+
+// defineReCaptchaElement()
 // console.log({document: document.location.pathname})
 // SAASController.authService.protectRoute(document.location.pathname)
 
@@ -94,7 +98,7 @@ I want to be able to pass is via custom component.
 // 1. Define the form by passing in the form selector
 // 2. Define validation for the form
 
-
+// This class can be used to manage how the OS form works...
 
 class OsForm implements SubmissionForm {
     formClass: Form;
