@@ -10,7 +10,6 @@ function getValue(shadowDom){
 }
 
 createCustomElement('os-form-button',function() {
-    document.addEventListener("DOMContentLoaded", () => {
         const type = this.getAttribute("type") || "button"; // Alt: provide submit 
 
        this.shadowRoot.querySelector('div').innerHTML = 
@@ -27,7 +26,6 @@ createCustomElement('os-form-button',function() {
             
             this.dispatchEvent(new CustomEvent('formSubmit', { bubbles: true, composed: true }));
         });
-    })
 
 }, "<div></div>", cssContent);
 

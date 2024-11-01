@@ -15,9 +15,7 @@ createCustomElement('os-form', function () {
     //     console.log({ TESTING: html })
     //     console.info(this);
     // });
-    document.addEventListener("DOMContentLoaded", () => {
-        // let fieldName = this.getAttribute("fieldname") || "" 
-        // console.log({this: this, fieldName})
+   
 
         this.shadowRoot.querySelector('div').innerHTML = `
         <form>
@@ -103,7 +101,6 @@ createCustomElement('os-form', function () {
         })
 
 
-    })
 
 }, "<div></div>", cssContent);
 

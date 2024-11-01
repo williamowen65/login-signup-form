@@ -12,14 +12,14 @@ export async function createCustomElement(name, onload, html, css) {
     `
 
     class customElementType extends HTMLElement {
-        validationFunction = [];
+        validationFunction = []; // <-- this is no longer used to track validation functions
         constructor() {
             super()
             this.attachShadow({ mode: 'open' })
             this.shadowRoot.appendChild(template.content.cloneNode(true))
         }
         connectedCallback() {
-            onload.bind(this)()
+            document.addEventListener('DOMContentLoaded', onload.bind(this))
             // TODO. Create method... 
             // getAttributes => object of attribute and values
             // use getAttributeNames() (https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNames)

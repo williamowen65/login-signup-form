@@ -13,7 +13,6 @@ createCustomElement('os-form-input', function () {
     // dom.watch();
 
 
-    document.addEventListener("DOMContentLoaded", () => {
         let inputType = this.getAttribute('type') || 'text';
         let fieldName = this.getAttribute("fieldname") || ""
         let alias = this.getAttribute("alias") || "";
@@ -138,7 +137,6 @@ createCustomElement('os-form-input', function () {
         //     })
         // })
 
-    })
 
 }, `  <div></div>`, cssContent);
 
