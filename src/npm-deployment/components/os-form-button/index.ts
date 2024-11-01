@@ -14,10 +14,11 @@ createCustomElement('os-form-button',function() {
         const type = this.getAttribute("type") || "button"; // Alt: provide submit 
 
        this.shadowRoot.querySelector('div').innerHTML = 
-       `
-        <button type="${type}">
+       `<button type="${type}">
             <slot><div style="">Unnamed Button</div><slot>
-        </button>`;
+        </button>
+        <div id="button-error" class="error-message"></div>
+        `;
 
         this.shadowRoot.querySelector('button').addEventListener('click', () => {
             // Dispatch a custom submit event from os-form-button

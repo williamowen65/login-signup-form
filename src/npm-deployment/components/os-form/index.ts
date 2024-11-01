@@ -58,6 +58,10 @@ createCustomElement('os-form', function () {
                 // maps objects to their values
                 return acc
             }, {})
+
+            //@ts-ignore
+            values.button = true;
+
             return values
         }
 

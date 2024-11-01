@@ -96,54 +96,74 @@ I want to be able to pass is via custom component.
 
 
 
-class OsForm implements SubmissionForm{
-        formClass: Form;
-        validatorCallback: Function;
-        constructor(formSelector: string, validator: Validator){
-            // super(formSelector);
-            this.formClass = new Form(formSelector)
-            //@ts-ignore
-            this.formClass.form.OsForm = this;
-            console.log("init form", {formClass: this.formClass})
-            this.formClass.validator = validator;
-        }
-        // The user should forced to make a submit function at some point in the workflow
-        submit(formData: any){
-            this.formClass.clearErrors(formData);
-            this.validatorCallback(formData)
-            const errors = this.formClass.validator.getErrors();
-            console.log("Submitted form - from osForm", {formData, errors})
+class OsForm implements SubmissionForm {
+    formClass: Form;
+    validatorCallback: Function;
+    osFormFeedback: Function;
+    constructor(formSelector: string, validator: Validator) {
+        // super(formSelector);
+        this.formClass = new Form(formSelector)
+        //@ts-ignore
+        this.formClass.form.OsForm = this;
+        console.log("init form", { formClass: this.formClass })
+        this.formClass.validator = validator;
+    }
+    // The user should forced to make a submit function at some point in the workflow
+    submit(formData: any) {
+        this.formClass.clearErrors(formData);
+        this.validatorCallback(formData)
+        const errors = this.formClass.validator.getErrors();
+        console.log("Submitted form - from osForm", { formData, errors })
 
-            if (Object.keys(errors).length === 0) {
-                console.log("Form submitted successfully!");
+        if (Object.keys(errors).length === 0) {
+            console.log("Form submitted successfully!");
             //     return SAASController.authService.createUser(formData.email,formData.password) // Promise
-            } else {
-                console.log("Form submission failed: ", errors);
-                this.formClass.displayErrors(errors);
-                // throw new Error("Form submission failed"); // Should be caught by calling code
-            }
+        } else {
+            console.log("Form submission failed: ", errors);
 
+            // Display errors on the form for input elements
+            this.formClass.displayErrors(errors);
+
+            // Display errors on the form for the button
+            const feedbackPrompts = this.osFormFeedback().onError;
+
+            Object.entries(feedbackPrompts).forEach(([key, value]) => {
+                const osFeedback = this.formClass.form.querySelector(`os-form-feedback[feedbackName="${key}"]`) as HTMLElement;
+                if (osFeedback) {
+                    osFeedback.innerText = value as string;
+                } else {
+                    console.warn(`Feedback element for ${key} not found.`);
+                }
+            })
+
+
+
+
+            // this.formClass.displayErrors({ "button": ["Failed to signup. Please try again."] });
+            // throw new Error("Form submission failed"); // Should be caught by calling code
         }
 
-        // This might be a function better suited to be defined in the Form Class, becuase it can be "under the hood"
-        
-        defineComponents(){ // not used
-            // Components are defined as html components on load
-        }
+    }
 
-        setValidation(validationFunction: Function){
-            console.log("setValidation",{validationFunction})
-            this.validatorCallback = validationFunction
-        }
+    // This might be a function better suited to be defined in the Form Class, becuase it can be "under the hood"
 
-         // Method to set a custom validation function
-        setInputValidation(selector:string, validationFunction: Function) {
+    defineComponents() { // not used
+        // Components are defined as html components on load
+    }
 
-           const input =  this.formClass.form.querySelector(`[fieldName="${selector}"]`) 
-           //@ts-ignore
-           input.setInputValidation(validationFunction)
-           console.log({input, formClass: this.formClass})
-        }
+    setValidation(validationFunction: Function) {
+        console.log("setValidation", { validationFunction })
+        this.validatorCallback = validationFunction
+    }
+
+    // Method to set a custom validation function
+    setInputValidation(selector: string, validationFunction: Function) {
+
+        const input = this.formClass.form.querySelector(`[fieldName="${selector}"]`)
+        //@ts-ignore
+        input.setInputValidation(validationFunction)
+        console.log({ input, formClass: this.formClass })
+    }
 
 }
 
@@ -152,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.OsForm = OsForm
     // @ts-ignore
     window.OsValidator = Validator
-    console.log({window})
+    console.log({ window })
 })
 
 /**

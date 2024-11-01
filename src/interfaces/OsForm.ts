@@ -1,29 +1,35 @@
 import { Validator } from "../utils/validation/Validator";
 
 export interface SubmissionForm {
-    
+
     formClass: Form;
     // @ts-ignore
     submit(formData);
 
 }
 
-export class Form  {
+export class Form {
     validator: Validator;
     form: HTMLFormElement;
-    
-    constructor(formSelector: string){
+
+    constructor(formSelector: string) {
         this.form = document.querySelector(formSelector) as HTMLFormElement
     }
 
 
-    
+
     // @ts-ignore
     displayErrors(errors) {
-        console.log("Display Errors: ", {errors})
+        console.log("Display Errors: ", { errors })
         for (let field in errors) {
             // Get access to shadow dom of custom element
-            const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
+            const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`) || document.querySelector(`os-form-button[buttonname="${field}"]`)
+
+            console.log({
+                osElement,
+                field,
+                errors
+            })
 
             const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
             const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
@@ -41,23 +47,33 @@ export class Form  {
     // @ts-ignore
     clearErrors(formData) { // <-- Clear the errors in the UI
         this.validator.clearErrors(); // <-- Clears the data object holding the errors
+
+        // handling os-form-feedback
+        const osbutton = this.form.querySelector("os-form-feedback") as HTMLElement;
+        if (osbutton) {
+            osbutton.innerText = "";
+        } else {
+            console.warn("os-form-feedback element not found");
+        }
+
+        // Handle input fields
         for (let field in formData) {
-            console.log("Clear Errors: ", {field, formData})
+            console.log("Clear Errors: ", { field, formData })
             // Attempt to locate the os-form-input element with the specific fieldname
             const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
-            
+
             if (osElement && osElement.shadowRoot) {  // Ensure osElement and shadowRoot are available
                 const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
                 const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
-                
-                console.log("Clear Errors: ", {field, formData, osElement, inputElement, errorElement});
-                
+
+                console.log("Clear Errors: ", { field, formData, osElement, inputElement, errorElement });
+
                 if (errorElement) {
                     errorElement.innerHTML = "";
                 } else {
                     console.warn(`Error element not found for field: ${field}`);
                 }
-    
+
                 if (inputElement) {
                     inputElement.classList.remove("input-error");
                 } else {
@@ -68,16 +84,16 @@ export class Form  {
             }
         }
     }
-    
-     // @ts-ignore
+
+    // @ts-ignore
     // clearErrors(formData) {
     //     for (let field in formData) {
     //         // Get access to shadow dom of custom element
     //         const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`);
-            
+
     //         const inputElement = osElement.shadowRoot.querySelector(`#${field}`);
     //         const errorElement = osElement.shadowRoot.querySelector(`#${field}-error`);
-            
+
     //         console.log("Clear Errors: ", {field, formData, osElement, inputElement, errorElement})
     //         if (errorElement) {
     //             console.log("clearing error")
@@ -92,7 +108,7 @@ export class Form  {
 
 
 
-   
+
 }
 
 /*

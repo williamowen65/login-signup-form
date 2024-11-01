@@ -106,7 +106,7 @@ export function setFormSubmitListeners(options = {}) {
                 button.resetButton();
             }).catch(err => {
                 console.log("(client) Signup Error: ", { err })
-                signupForm.displayErrors({ "signup": ["Failed to signup. Please try again."] });
+                signupForm.displayErrors({ "button": ["Failed to signup. Please try again."] });
                 button.resetButton();
             })
         }, 2000)
