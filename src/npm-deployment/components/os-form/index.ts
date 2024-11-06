@@ -58,7 +58,16 @@ createCustomElement('os-form', function () {
             }, {})
 
             //@ts-ignore
-            values.button = true;
+            // values.button = true;
+            //@ts-ignore
+            values.reCAPTCHA = {
+                fieldName: "reCAPTCHA",
+                //@ts-ignore
+                value: document.body?.data?.recaptcha || null,
+                type: "reCAPTCHA",
+                alias: "reCAPTCHA",
+                // validation: undefined
+            };
 
             return values
         }

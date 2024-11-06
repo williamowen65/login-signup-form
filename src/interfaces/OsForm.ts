@@ -22,6 +22,11 @@ export class Form {
     displayErrors(errors) {
         console.log("Display Errors: ", { errors })
         for (let field in errors) {
+            if(field == "reCAPTCHA"){
+                const osReCaptchaFeedback = document.querySelector(`os-form-feedback[feedbackname="${field}"]`)
+                osReCaptchaFeedback.innerHTML = `<small>${errors[field][0]}</small>`
+                continue
+            }
             // Get access to shadow dom of custom element
             const osElement = document.querySelector(`os-form-input[fieldname="${field}"]`) || document.querySelector(`os-form-button[buttonname="${field}"]`)
 

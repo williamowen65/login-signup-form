@@ -7,6 +7,18 @@ button {
     margin-inline: 5px;
 }
 
+.row{
+    display: flex;
+    justify-content: center;
+    // width: 400px;
+    // margin: auto;
+    // margin-top: 10px;
+    button {
+        // width: 48%;
+        // margin: auto;
+    }
+}
+
 #auth-container {
     h2 {
         user-select: none;
@@ -215,17 +227,6 @@ button {
     }
 }
 
-.row{
-    display: flex;
-    justify-content: center;
-    // width: 400px;
-    // margin: auto;
-    // margin-top: 10px;
-    button {
-        // width: 48%;
-        // margin: auto;
-    }
-}
 
 .mobile-view{ 
     display: none;
