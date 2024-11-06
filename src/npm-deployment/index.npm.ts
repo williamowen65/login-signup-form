@@ -104,14 +104,20 @@ class OsForm implements SubmissionForm {
     formClass: Form;
     validatorCallback: Function;
     osFormFeedback: Function;
-    constructor(formSelector: string, validator: Validator) {
+    onSubmitCallback: Function = (formData: any) => { console.log("Default form submit", { formData }) }
+    constructor(formSelector: string, validator: Validator, onSubmit: Function) {
         // super(formSelector);
         this.formClass = new Form(formSelector)
         //@ts-ignore
         this.formClass.form.OsForm = this;
         console.log("init form", { formClass: this.formClass })
         this.formClass.validator = validator;
+        this.onSubmitCallback = onSubmit;
+        console.log("init form", { onSubmit, this: this })
     }
+
+ 
+
     // The user should forced to make a submit function at some point in the workflow
     submit(formData: any) {
         this.formClass.clearErrors(formData);
@@ -121,6 +127,7 @@ class OsForm implements SubmissionForm {
 
         if (Object.keys(errors).length === 0) {
             console.log("Form submitted successfully!");
+            this.onSubmitCallback(formData);
             //     return SAASController.authService.createUser(formData.email,formData.password) // Promise
         } else {
             console.log("Form submission failed: ", errors);

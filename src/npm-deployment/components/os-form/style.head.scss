@@ -94,15 +94,15 @@ div[auth-mode="signup"] {
         &[auth-mode="signup"]{
 
             
-                    .left {
-                        display: none;
-                    }
-        }
-        &[auth-mode="login"]{
-
             .right {
                 display: none;
             }
+        }
+        &[auth-mode="login"]{
+            .left {
+                display: none;
+            }
+
         }
         
 
