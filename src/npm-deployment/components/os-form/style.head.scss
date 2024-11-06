@@ -23,7 +23,7 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: space-around;
     width: 800px;
@@ -37,9 +37,10 @@ label {
 .cover {
     z-index: 1;
     width: 400px;
-    height: 70vh;
+    // height: 70vh;
+    height: 100%;
     position: absolute;
-    background-color: blue;
+    background-color: lightgray;
     background-size: cover;
     transition: left 0.5s, translate 0.5s;
     display: flex;
@@ -105,17 +106,6 @@ div[auth-mode="signup"] {
         }
         
 
-        /*
-            .right {
-                display: none;
-            }
-        }
-            .left {
-                display: none;
-            }
-        }
-        
-        */ 
         .cover {
             display: none;
         }
