@@ -79,19 +79,50 @@ div[auth-mode="signup"] {
 }
 
 
+.mobile-view{ 
+    display: none;
+}
+
+
 // Media query for mobile 
 @media only screen and (max-width: 767px) {
     .os-dual-form {
         margin-top: 22px;
         width: 100%;
         flex-direction: column;
+        &[auth-mode="signup"]{
 
-        .left {
-            display: none;
-            ;
+            
+                    .left {
+                        display: none;
+                    }
         }
+        &[auth-mode="login"]{
 
-        .right {}
+            .right {
+                display: none;
+            }
+        }
+        
+
+        /*
+            .right {
+                display: none;
+            }
+        }
+            .left {
+                display: none;
+            }
+        }
+        
+        */ 
+        .cover {
+            display: none;
+        }
+    }
+
+    .mobile-view{
+        display: inline-block;
     }
 
 }

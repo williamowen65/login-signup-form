@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const OsDualForm = document.querySelector(".os-dual-form");
         const authmode = OsDualForm.getAttribute("auth-mode");
 
-        const toggleButtons = document.querySelectorAll(".os-dual-form .cover button")
+        const toggleButtons = document.querySelectorAll(".os-dual-form .os-form-toggle")
 
         // console.log({ toggleButtons, authmode })
         toggleButtons.forEach((button) => {
