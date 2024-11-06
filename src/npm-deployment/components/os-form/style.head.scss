@@ -1,0 +1,96 @@
+form:not(#reCAPTCHAForm) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 400px;
+}
+
+
+
+label {
+    translate: 30px 30px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.os-dual-form {
+    /* Todo- Expose this class (with correct styles) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    width: 800px;
+    margin: auto;
+    border: 1px solid #ccc;
+    position: relative;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+.cover {
+    z-index: 1;
+    width: 400px;
+    height: 70vh;
+    position: absolute;
+    background-color: blue;
+    background-size: cover;
+    transition: left 0.5s, translate 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 10px;
+    box-sizing: border-box;
+    text-align: center;
+    &.left {
+        left: 00%;
+        &::before {
+            background-image: url('./assets/authformImgs/image-1.jpg'); 
+        }
+    }
+
+    &.right {
+        left: 100%;
+        translate: -100% 0;
+        &::before {
+            background-image: url('./assets/authformImgs/image-3.jpg'); 
+        }
+    }
+   
+}
+
+div[auth-mode="login"] {
+    .cover.right {
+        translate: 0;
+    }
+}
+
+div[auth-mode="signup"] {
+    .cover.left {
+        translate: -100%;
+    }
+}
+
+// Media query for mobile 
+@media only screen and (max-width: 767px) {
+    .os-dual-form {
+        margin-top: 22px;
+        width: 100%;
+        flex-direction: column;
+
+        .left {
+            display: none;
+            ;
+        }
+
+        .right {}
+    }
+
+}

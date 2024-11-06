@@ -70,8 +70,7 @@ const productionConfig = {
             template: './src/pages/welcome/index.html',
             chunks: ['welcome'],
         }),
-        new MiniCssExtractPlugin(),
-
+       
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
@@ -81,6 +80,10 @@ const productionConfig = {
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
+            },
+            {
+                test: /\.head\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -114,7 +117,12 @@ module.exports = () => {
             },
             plugins: [
                 new Dotenv(),
-                new MiniCssExtractPlugin() 
+                new MiniCssExtractPlugin(
+                    {
+                        filename: 'styles.css'
+                    }
+                ),
+        
             ],
             module: {
                 rules: [
@@ -128,6 +136,7 @@ module.exports = () => {
                         use: ['raw-loader']
                     },
                     { test: /\.scss$/, use: ['raw-loader', 'sass-loader']},
+                    { test: /\.css$/, use: ['css-loader', 'sass-loader']},
                 ]
             }
         })

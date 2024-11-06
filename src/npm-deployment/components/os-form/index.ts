@@ -1,7 +1,7 @@
 import { capitalizeFirstLetter } from "../../../utils/stringMethods";
 import { createCustomElement } from "../../utils/custom-element";
 //@ts-ignore
-import cssContent from "./style.scss";
+import cssContent from "./style.head.scss";
 
 
 createCustomElement('os-form', function () {
@@ -109,6 +109,11 @@ createCustomElement('os-form', function () {
             this.OsForm.submit(eventDetail.values)
         })
 
+    console.log({cssContent})
+        // Also add this style to global document
+        const style = document.createElement('style')
+        style.textContent = cssContent;
+        document.querySelector('head').appendChild(style);
 
 
 }, "<div></div>", cssContent);
