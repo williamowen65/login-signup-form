@@ -176,6 +176,28 @@ document.addEventListener("DOMContentLoaded", () => {
     window.OsForm = OsForm
     // @ts-ignore
     window.OsValidator = Validator
+    // @ts-ignore
+    window.OsMethods = {
+        // @ts-ignore
+        toggleDualForm: () => {
+        }
+    }
+
+    window.addEventListener("load", () => {
+        const OsDualForm = document.querySelector(".os-dual-form");
+        const authmode = OsDualForm.getAttribute("auth-mode");
+
+        const toggleButtons = document.querySelectorAll(".os-dual-form .cover button")
+
+        // console.log({ toggleButtons, authmode })
+        toggleButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                const authmode = OsDualForm.getAttribute("auth-mode");
+                OsDualForm.setAttribute("auth-mode", authmode === "signup" ? "login" : "signup")
+            })
+        })
+    })
+
     console.log({ window })
 })
 
