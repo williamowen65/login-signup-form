@@ -20,8 +20,8 @@ createCustomElement('os-form-input', function () {
 
         if (inputType == 'password') {
             this.shadowRoot.querySelector('div').innerHTML = `
-        <label for="${fieldName}" password-toggle="hide">
-          <small class="text">${alias || capitalizeFirstLetter(fieldName)}</small>
+        <label for="${fieldName}" password-toggle="hide" >
+          <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)}</small>
           
           <div class="password-container">
             <input type="password" id="${fieldName}" name="${fieldName}" />
@@ -37,8 +37,8 @@ createCustomElement('os-form-input', function () {
         } else {
 
             this.shadowRoot.querySelector('div').innerHTML = `
-        <label for="${fieldName}">
-        <small class="text">${alias || capitalizeFirstLetter(fieldName)}</small>
+        <label for="${fieldName}" >
+        <small class="text" part="labelText">${alias || capitalizeFirstLetter(fieldName)}</small>
         <input type="text" id="${fieldName}" name="${fieldName}" />
         <div id="${fieldName}-error" class="error-message"></div>
         </label>
@@ -52,20 +52,24 @@ createCustomElement('os-form-input', function () {
         this.shadowRoot.querySelectorAll('input').forEach((el: HTMLInputElement) => {
             el.addEventListener('focus', (e) => {
                 const target = e.target as HTMLInputElement;
-                target.closest('label').classList.add('moveLabel')
+                target.closest('label').classList.add('moveLabel');
+                target.closest('label').querySelector('[part]').setAttribute('part', 'labelText moveLabel');
             })
             el.addEventListener('blur', (e) => {
                 const target = e.target as HTMLInputElement;
                 if (target.value === '') {
                     target.closest('label').classList.remove('moveLabel')
+                    target.closest('label').querySelector('[part]').setAttribute('part', 'labelText');
                 }
             })
             el.addEventListener('change', (e) => {
                 const target = e.target as HTMLInputElement;
                 if (target.value === '') {
-                    target.closest('label').classList.remove('moveLabel')
+                    target.closest('label').classList.remove('moveLabel');
+                    target.closest('label').querySelector('[part]').setAttribute('part', 'labelText');
                 } else {
-                    target.closest('label').classList.add('moveLabel')
+                    target.closest('label').classList.add('moveLabel');
+                    target.closest('label').querySelector('[part]').setAttribute('part', 'labelText moveLabel');
                 }
             })
 
